@@ -5,6 +5,8 @@ import session from "cookie-session";
 import {config} from "./config/app.config";
 import { request } from "http";
 import connectDatabase from "./config/database.config";
+import { error } from "console";
+import { errorHandler } from "./middlewares/errorHandler.middleware";
 
 
 const app = express();
@@ -32,6 +34,8 @@ app.get('/',(req:Request, res:Response, next:NextFunction)=> {
     res.status(200).json({
          message: "Hello Subscribe to the chaneel and sharing with us ",
     });
+
+app.use(errorHandler)
    
 });
 app.listen(config.PORT,async () => {
