@@ -4,6 +4,7 @@ import cors from "cors";
 import session from "cookie-session";
 import {config} from "./config/app.config";
 import { request } from "http";
+import connectDatabase from "./config/database.config";
 
 
 const app = express();
@@ -35,4 +36,5 @@ app.get('/',(req:Request, res:Response, next:NextFunction)=> {
 });
 app.listen(config.PORT,async () => {
     console.log(`Server listening on port ${config.PORT} in ${config.NODE_ENV} `);
+    await connectDatabase();
 })
