@@ -11,8 +11,8 @@ import { HTTPSTATUS } from "./config/http.config";
 import { asyncHandler } from "./middlewares/asyncHandler.middleware";
 import { BadRequestException } from "./utils/appError";
 import { ErrorCodeEnum } from "./enums/error-code.enum";
-
-
+import authRoutes from "./routes/auth.route";
+import  "./config/passport.config";
 const app = express();
 const BASE_PATH = config.BASE_PATH;
 
@@ -34,19 +34,27 @@ cors({
     credentials:true,
 })
 );
+// app.get(
+//   `/`,
+//   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+//     throw new BadRequestException(
+//       "This is a bad request",
+//       ErrorCodeEnum.AUTH_INVALID_TOKEN
+//     );
+//     return res.status(HTTPSTATUS.OK).json({
+//       message: "Hello Subscribe to the channel & share",
+//     });
+//   })
+// );
 app.get(
   `/`,
   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    throw new BadRequestException(
-      "This is a bad request",
-      ErrorCodeEnum.AUTH_INVALID_TOKEN
-    );
     return res.status(HTTPSTATUS.OK).json({
       message: "Hello Subscribe to the channel & share",
     });
   })
 );
-
+app.use(`${BASE_PATH}/auth`, authRoutes)
 
 app.use(errorHandler);
    
