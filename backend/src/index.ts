@@ -13,6 +13,10 @@ import { ErrorCodeEnum } from "./enums/error-code.enum";
 import "./config/passport.config";
 import passport from "passport";
 import authRoutes from "./routes/auth.route";
+import usreRoutes from "./routes/user.route";
+import isAuthenticated from "./middlewares/isAuthenticated.middleware";
+import workspaceRoutes from "./routes/workspace.route";
+import memberRoutes from "./routes/member.route";
 
 
 const app = express();
@@ -58,7 +62,9 @@ app.get(
 
 app.use(`${BASE_PATH}/auth`, authRoutes);
 
-
+app.use(`${BASE_PATH}/user`,isAuthenticated,usreRoutes);
+app.use(`${BASE_PATH}/workspace`, isAuthenticated, workspaceRoutes);
+app.use(`${BASE_PATH}/member`, isAuthenticated, memberRoutes);
 app.use(errorHandler);
 
 app.listen(config.PORT, async () => {
