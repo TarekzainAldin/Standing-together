@@ -8,7 +8,7 @@ import {
 import { getMemberRoleInWorkspace } from "../services/member.service";
 import { roleGuard } from "../utils/roleGuard";
 import { Permissions } from "../enums/role.enum";
-import {createProjectService, getProjectAnalyticsService, getProjectByIdAndWorkspaceIdService, getProjectsInWorkspaceService} from "../services/project.service";
+import {createProjectService, deleteProjectService, getProjectAnalyticsService, getProjectByIdAndWorkspaceIdService, getProjectsInWorkspaceService, updateProjectService} from "../services/project.service";
 import { HTTPSTATUS } from "../config/http.config";
 import { workspaceIdSchema } from "../validation/workspace.valdation";
 
@@ -99,6 +99,48 @@ export const getProjectAnalyticsController = asyncHandler(
     return res.status(HTTPSTATUS.OK).json({
       message: "Project analytics retrieved successfully",
       analytics,
+    });
+  }
+);
+
+export const updateProjectController = asyncHandler(
+  async (req: Request, res: Response) => {
+    const userId = req.user?._id;
+
+    const projectId = projectIdSchema.parse(req.params.id);
+    const workspaceId = workspaceIdSchema.parse(req.params.workspaceId);
+
+    const body = updateProjectSchema.parse(req.body);
+
+    const { role } = await getMemberRoleInWorkspace(userId, workspaceId);
+    roleGuard(role, [Permissions.EDIT_PROJECT]);
+
+    const { project } = await updateProjectService(
+      workspaceId,
+      projectId,
+      body
+    );
+      return res.status(HTTPSTATUS.OK).json({
+      message: "Project updated successfully",
+      project,
+    });
+  }
+);
+
+export const deleteProjectController = asyncHandler(
+  async (req: Request, res: Response) => {
+    const userId = req.user?._id;
+
+    const projectId = projectIdSchema.parse(req.params.id);
+    const workspaceId = workspaceIdSchema.parse(req.params.workspaceId);
+
+    const { role } = await getMemberRoleInWorkspace(userId, workspaceId);
+    roleGuard(role, [Permissions.DELETE_PROJECT]);
+
+    await deleteProjectService(workspaceId, projectId);
+
+    return res.status(HTTPSTATUS.OK).json({
+      message: "Project deleted successfully",
     });
   }
 );
