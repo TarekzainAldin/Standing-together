@@ -1,8 +1,15 @@
-import {Router} from "express";
-import { createProjectController } from "../controllers/project.controller";
+import { Router } from "express";
+import { createProjectController, getAllProjectsInWorkspaceController, getProjectByIdAndWorkspaceIdController } from "../controllers/project.controller";
 
-const projectRouter =Router(); 
+const projectRoutes = Router();
 
-projectRouter.post("/workspace/workspaceId/create",createProjectController);
-
-export default projectRouter;
+projectRoutes.post("/workspace/:workspaceId/create", createProjectController);
+projectRoutes.get(
+  "/workspace/:workspaceId/all",
+  getAllProjectsInWorkspaceController
+);
+projectRoutes.get(
+  "/:id/workspace/:workspaceId",
+  getProjectByIdAndWorkspaceIdController
+);
+export default projectRoutes;
