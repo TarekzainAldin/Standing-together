@@ -82,19 +82,23 @@ export const getProjectByIdAndWorkspaceIdController = asyncHandler(
 );
 
 export const getProjectAnalyticsController = asyncHandler(
-  async(req:Request, res:Response)=>{
-    
+  async (req: Request, res: Response) => {
     const projectId = projectIdSchema.parse(req.params.id);
-    const workspaceId= workspaceIdSchema.parse(req.params.workspaceId);
+    const workspaceId = workspaceIdSchema.parse(req.params.workspaceId);
 
     const userId = req.user?._id;
-    const { role } = await getMemberRoleInWorkspace(userId,workspaceId);
-    roleGuard(role,[Permissions.VIEW_ONLY]);
-    const {analytics} = await getProjectAnalyticsService(
-      projectId,workspaceId);
-      return res.status(HTTPSTATUS.OK).json({
-        message:"project analytic retrived successfully",
-        analytics,
-      })
+
+    const { role } = await getMemberRoleInWorkspace(userId, workspaceId);
+    roleGuard(role, [Permissions.VIEW_ONLY]);
+
+    const { analytics } = await getProjectAnalyticsService(
+      workspaceId,
+      projectId
+    );
+
+    return res.status(HTTPSTATUS.OK).json({
+      message: "Project analytics retrieved successfully",
+      analytics,
+    });
   }
 );
