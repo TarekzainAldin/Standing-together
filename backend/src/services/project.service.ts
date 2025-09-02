@@ -1,7 +1,10 @@
+import mongoose from "mongoose";
 import projectModel from "../models/project.model";
 import ProjectModel from "../models/project.model";
+import TaskModel from "../models/task.model";
 import { NotFoundException } from "../utils/appError";
 import { workspaceIdSchema } from "../validation/workspace.valdation";
+import { TaskStatusEnum } from "../enums/task.enum";
 
 export const createProjectService = async (
   userId: string,
@@ -69,3 +72,64 @@ export const getProjectByIdAndWorkspaceIdService = async (
   return { project };
 };
  
+export const getProjectAnalyticsService = async (
+  workspaceId: string,
+  projectId: string
+) => {
+  const project = await ProjectModel.findById(projectId);
+
+  if (!project || project.workspace.toString() !== workspaceId.toString()) {
+    throw new NotFoundException(
+      "Project not found or does not belong to this workspace"
+    );
+  }
+
+  const currentDate = new Date();
+
+  //USING Mongoose aggregate
+  const taskAnalytics = await TaskModel.aggregate([
+    {
+      $match: {
+        project: new mongoose.Types.ObjectId(projectId),
+      },
+    },
+    {
+      $facet: {
+        totalTasks: [{ $count: "count" }],
+        overdueTasks: [
+          {
+            $match: {
+              dueDate: { $lt: currentDate },
+              status: {
+                $ne: TaskStatusEnum.DONE,
+              },
+            },
+          },
+          {
+            $count: "count",
+          },
+        ],
+        completedTasks: [
+          {
+            $match: {
+              status: TaskStatusEnum.DONE,
+            },
+          },
+          { $count: "count" },
+        ],
+      },
+    },
+  ]);
+
+  const _analytics = taskAnalytics[0];
+
+  const analytics = {
+    totalTasks: _analytics.totalTasks[0]?.count || 0,
+    overdueTasks: _analytics.overdueTasks[0]?.count || 0,
+    completedTasks: _analytics.completedTasks[0]?.count || 0,
+  };
+
+  return {
+    analytics,
+  };
+};
