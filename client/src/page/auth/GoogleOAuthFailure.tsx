@@ -14,11 +14,10 @@ const GoogleOAuthFailure = () => {
           className="flex items-center gap-2 self-center font-medium"
         >
           <Logo />
-          Standing Together .
+          Standing Together.
         </Link>
-        </Link>
-        <div className="flex flex-col gap-6"></div>
       </div>
+
       <Card>
         <CardContent>
           <div style={{ textAlign: "center", marginTop: "50px" }}>
