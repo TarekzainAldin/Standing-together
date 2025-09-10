@@ -80,7 +80,7 @@ const SignIn = () => {
           className="flex items-center gap-2 self-center font-medium"
         >
           <Logo />
-          Standing Together .
+          sTANDING TOGETHER .
         </Link>
         <div className="flex flex-col gap-6">
           <Card>
@@ -155,7 +155,7 @@ const SignIn = () => {
                           )}
                         />
                       </div>
-                     <Button
+                      <Button
                         disabled={isPending}
                         type="submit"
                         className="w-full"

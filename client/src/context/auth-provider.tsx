@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 import usePermissions from "@/hooks/use-permissions";
 import { PermissionType } from "@/constant";
 
-
 // Define the context shape
 type AuthContextType = {
   user?: UserType;
@@ -27,7 +26,6 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
- 
   const navigate = useNavigate();
   const workspaceId = useWorkspaceId();
 
