@@ -1,9 +1,30 @@
-
-// import { promises } from "dns";
-
-
 import API from "./axios-client";
-import { AllMembersInWorkspaceResponseType, AllProjectPayloadType, AllProjectResponseType, AllWorkspaceResponseType, AnalyticsResponseType, ChangeWorkspaceMemberRoleType, CreateProjectPayloadType, CreateTaskPayloadType, CreateWorkspaceResponseType, CreateWorkspaceType, CurrentUserResponseType, EditProjectPayloadType, EditWorkspaceType, LoginResponseType, loginType, ProjectByIdPayloadType, ProjectResponseType, registerType, WorkspaceByIdResponseType } from "@/types/api.type";
+import {
+  AllMembersInWorkspaceResponseType,
+  AllProjectPayloadType,
+  AllProjectResponseType,
+  AllTaskPayloadType,
+  AllTaskResponseType,
+  AnalyticsResponseType,
+  ChangeWorkspaceMemberRoleType,
+  CreateProjectPayloadType,
+  CreateTaskPayloadType,
+  EditTaskPayloadType,
+  CreateWorkspaceResponseType,
+  EditProjectPayloadType,
+  ProjectByIdPayloadType,
+  ProjectResponseType,
+} from "../types/api.type";
+import {
+  AllWorkspaceResponseType,
+  CreateWorkspaceType,
+  CurrentUserResponseType,
+  LoginResponseType,
+  loginType,
+  registerType,
+  WorkspaceByIdResponseType,
+  EditWorkspaceType,
+} from "@/types/api.type";
 
 export const loginMutationFn = async (
   data: loginType
@@ -14,7 +35,6 @@ export const loginMutationFn = async (
 
 export const registerMutationFn = async (data: registerType) =>
   await API.post("/auth/register", data);
-
 
 export const logoutMutationFn = async () => await API.post("/auth/logout");
 
@@ -28,8 +48,8 @@ export const getCurrentUserQueryFn =
 //************* */
 
 export const createWorkspaceMutationFn = async (
-  data:CreateWorkspaceType
-):Promise<CreateWorkspaceResponseType> => {
+  data: CreateWorkspaceType
+): Promise<CreateWorkspaceResponseType> => {
   const response = await API.post(`/workspace/create/new`, data);
   return response.data;
 };
@@ -42,12 +62,19 @@ export const editWorkspaceMutationFn = async ({
   return response.data;
 };
 
+export const getAllWorkspacesUserIsMemberQueryFn =
+  async (): Promise<AllWorkspaceResponseType> => {
+    const response = await API.get(`/workspace/all`);
+    return response.data;
+  };
+
 export const getWorkspaceByIdQueryFn = async (
   workspaceId: string
 ): Promise<WorkspaceByIdResponseType> => {
   const response = await API.get(`/workspace/${workspaceId}`);
   return response.data;
 };
+
 export const getMembersInWorkspaceQueryFn = async (
   workspaceId: string
 ): Promise<AllMembersInWorkspaceResponseType> => {
@@ -55,16 +82,9 @@ export const getMembersInWorkspaceQueryFn = async (
   return response.data;
 };
 
-export const getAllWorkspacesUserIsMemberQueryFn =
-  async (): Promise<AllWorkspaceResponseType> => {
-    const response = await API.get(`/workspace/all`);
-    return response.data;
-  };
-
-
-export const getWorkspaceAnalyticsQueryFn = async ( 
-  workspaceId:string
-):Promise<AnalyticsResponseType> => {
+export const getWorkspaceAnalyticsQueryFn = async (
+  workspaceId: string
+): Promise<AnalyticsResponseType> => {
   const response = await API.get(`/workspace/analytics/${workspaceId}`);
   return response.data;
 };
@@ -102,14 +122,13 @@ export const invitedUserJoinWorkspaceMutationFn = async (
   return response.data;
 };
 
-
 //********* */
 //********* PROJECTS
 export const createProjectMutationFn = async ({
   workspaceId,
   data,
-}:CreateProjectPayloadType):Promise<ProjectResponseType> => {
-   const response = await API.post(
+}: CreateProjectPayloadType): Promise<ProjectResponseType> => {
+  const response = await API.post(
     `/project/workspace/${workspaceId}/create`,
     data
   );
@@ -139,7 +158,6 @@ export const getProjectsInWorkspaceQueryFn = async ({
   return response.data;
 };
 
-
 export const getProjectByIdQueryFn = async ({
   workspaceId,
   projectId,
@@ -153,9 +171,9 @@ export const getProjectByIdQueryFn = async ({
 export const getProjectAnalyticsQueryFn = async ({
   workspaceId,
   projectId,
-}:ProjectByIdPayloadType):Promise<AnalyticsResponseType> => {
+}: ProjectByIdPayloadType): Promise<AnalyticsResponseType> => {
   const response = await API.get(
-    `/project/${projectId} /workspace/${workspaceId}/analytics`
+    `/project/${projectId}/workspace/${workspaceId}/analytics`
   );
   return response.data;
 };
@@ -188,6 +206,58 @@ export const createTaskMutationFn = async ({
 };
 
 
-export const getAllTasksQueryFn = async () => {};
+export const editTaskMutationFn = async ({
+  taskId,
+  projectId,
+  workspaceId,
+  data,
+}: EditTaskPayloadType): Promise<{message: string;}> => {
+  const response = await API.put(
+    `/task/${taskId}/project/${projectId}/workspace/${workspaceId}/update/`,
+    data
+  );
+  return response.data;
+};
 
-export const deleteTaskMutationFn = async () => {};
+export const getAllTasksQueryFn = async ({
+  workspaceId,
+  keyword,
+  projectId,
+  assignedTo,
+  priority,
+  status,
+  dueDate,
+  pageNumber,
+  pageSize,
+}: AllTaskPayloadType): Promise<AllTaskResponseType> => {
+  const baseUrl = `/task/workspace/${workspaceId}/all`;
+
+  const queryParams = new URLSearchParams();
+  if (keyword) queryParams.append("keyword", keyword);
+  if (projectId) queryParams.append("projectId", projectId);
+  if (assignedTo) queryParams.append("assignedTo", assignedTo);
+  if (priority) queryParams.append("priority", priority);
+  if (status) queryParams.append("status", status);
+  if (dueDate) queryParams.append("dueDate", dueDate);
+  if (pageNumber) queryParams.append("pageNumber", pageNumber?.toString());
+  if (pageSize) queryParams.append("pageSize", pageSize?.toString());
+
+  const url = queryParams.toString() ? `${baseUrl}?${queryParams}` : baseUrl;
+  const response = await API.get(url);
+  return response.data;
+};
+
+export const deleteTaskMutationFn = async ({
+  workspaceId,
+  taskId,
+}: {
+  workspaceId: string;
+  taskId: string;
+}): Promise<{
+  message: string;
+}> => {
+  const response = await API.delete(
+    `task/${taskId}/workspace/${workspaceId}/delete`
+  );
+  return response.data;
+};
