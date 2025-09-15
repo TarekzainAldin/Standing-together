@@ -30,7 +30,7 @@ Built with **Node.js, Express, MongoDB, and Passport.js**, it integrates with a 
 
 ### 1. Clone the repository  
 ```
-git clone https://github.com/your-username/standing-together.git
+git clone  https://github.com/TarekzainAldin/Standing-together.git
 cd standing-together
 
 
