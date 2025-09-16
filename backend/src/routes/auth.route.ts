@@ -25,13 +25,22 @@ authRoutes.get(
   })
 );
 
+// authRoutes.get(
+//   "/google/callback",
+//   passport.authenticate("google", {
+//     failureRedirect: failedUrl,
+//     session:false,
+//   }),
+//   googleLoginCallback
+// );
 authRoutes.get(
   "/google/callback",
   passport.authenticate("google", {
     failureRedirect: failedUrl,
-    session:false,
+    session: false,
   }),
   googleLoginCallback
 );
+
 
 export default authRoutes;
