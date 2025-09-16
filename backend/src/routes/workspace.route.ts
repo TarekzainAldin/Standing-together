@@ -1,5 +1,6 @@
  import {Router} from "express" ; 
 import { changeWorkspaceMemberRoleController, createWorkspaceController,  deleteWorkspaceByIdController,  getAllWorkspacesUserIsMemberController, getWorkspaceAnalyticsController, getWorkspaceByIdController, getWorkspaceMembersController, updateWorkspaceByIdController, } from "../controllers/workspace.controller";
+import { passportAuthenticateJWT } from "../config/passport.config";
 
 const workspaceRoutes = Router();
 
