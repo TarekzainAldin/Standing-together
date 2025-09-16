@@ -13,6 +13,7 @@ import { logoutMutationFn } from "@/lib/api";
 import { toast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import { Loader } from "lucide-react";
+import { useStoreBase } from "@/store/store"; // Make sure this is your properly typed store
 
 const LogoutDialog = (props: {
   isOpen: boolean;
@@ -20,6 +21,9 @@ const LogoutDialog = (props: {
 }) => {
   const { isOpen, setIsOpen } = props;
   const navigate = useNavigate();
+
+  // Use the properly typed store
+  const { clearAccessToken } = useStoreBase.getState();
 
   const queryClient = useQueryClient();
 
@@ -29,47 +33,56 @@ const LogoutDialog = (props: {
       queryClient.resetQueries({
         queryKey: ["authUser"],
       });
+      clearAccessToken();
       navigate("/");
       setIsOpen(false);
     },
-    onError: (error) => {
+    onError: (error: unknown) => {
+      let message = "An unexpected error occurred";
+
+      if (error instanceof Error) {
+        message = error.message;
+      }
+
       toast({
         title: "Error",
-        description: error.message,
+        description: message,
         variant: "destructive",
       });
     },
   });
 
-  // Handle logout action
   const handleLogout = useCallback(() => {
     if (isPending) return;
     mutate();
   }, [isPending, mutate]);
 
   return (
-    <>
-      <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Are you sure you want to log out?</DialogTitle>
-            <DialogDescription>
-              This will end your current session and you will need to log in
-              again to access your account.
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter>
-            <Button disabled={isPending} type="button" onClick={handleLogout}>
-              {isPending && <Loader className="animate-spin" />}
-              Sign out
-            </Button>
-            <Button type="button" onClick={() => setIsOpen(false)}>
-              Cancel
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-    </>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Are you sure you want to log out?</DialogTitle>
+          <DialogDescription>
+            This will end your current session and you will need to log in
+            again to access your account.
+          </DialogDescription>
+        </DialogHeader>
+        <DialogFooter className="flex gap-2">
+          <Button
+            disabled={isPending}
+            type="button"
+            onClick={handleLogout}
+            className="flex items-center gap-2"
+          >
+            {isPending && <Loader className="animate-spin" />}
+            Sign out
+          </Button>
+          <Button type="button" onClick={() => setIsOpen(false)}>
+            Cancel
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 };
 
