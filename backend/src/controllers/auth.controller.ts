@@ -25,9 +25,9 @@ export const googleLoginCallback = asyncHandler(
   //     `${config.FRONTEND_ORIGIN}/workspace/${currentWorkspace}`
   //   );
      return res.redirect(
-        `${config.FRONTEND_GOOGLE_CALLBACK_URL}?status=success&access_token =${jwt}&current_workspace=${currentWorkspace}`
-      );
-    }
+  `${config.FRONTEND_GOOGLE_CALLBACK_URL}?status=success&access_token=${jwt}&current_workspace=${currentWorkspace}`
+);
+  }
    
 );
 

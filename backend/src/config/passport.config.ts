@@ -15,41 +15,77 @@ import {
 } from "../services/auth.service";
 import { signJwtToken } from "../utils/jwt";
 
+// passport.use(
+//   new GoogleStrategy(
+//     {
+//       clientID: config.GOOGLE_CLIENT_ID,
+//       clientSecret: config.GOOGLE_CLIENT_SECRET,
+//       callbackURL: config.GOOGLE_CALLBACK_URL,
+//       scope: ["profile", "email"],
+//       passReqToCallback: true,
+//     },
+//     async (req: Request, accessToken, refreshToken, profile, done) => {
+//       try {
+//         const { email, sub: googleId, picture } = profile._json;
+//         console.log(profile, "profile");
+//         console.log(googleId, "googleId");
+//         if (!googleId) {
+//           throw new NotFoundException("Google ID (sub) is missing");
+//         }
+
+//         const { user } = await loginOrCreateAccountService({
+//           provider: ProviderEnum.GOOGLE,
+//           displayName: profile.displayName,
+//           providerId: googleId,
+//           picture: picture ?? "", 
+//           email: email ?? "",
+//         });
+//         const jwt = signJwtToken({userId:user._id});
+//         req.jwt = jwt;
+
+//         done(null, user);
+//       } catch (error) {
+//         done(error, false);
+//       }
+//     }
+//   )
+// );
+// Google Strategy
 passport.use(
   new GoogleStrategy(
     {
       clientID: config.GOOGLE_CLIENT_ID,
       clientSecret: config.GOOGLE_CLIENT_SECRET,
-      callbackURL: config.GOOGLE_CALLBACK_URL,
+      callbackURL: config.GOOGLE_CALLBACK_URL, // http://localhost:8000/api/auth/google/callback
       scope: ["profile", "email"],
       passReqToCallback: true,
     },
     async (req: Request, accessToken, refreshToken, profile, done) => {
       try {
         const { email, sub: googleId, picture } = profile._json;
-        console.log(profile, "profile");
-        console.log(googleId, "googleId");
-        if (!googleId) {
-          throw new NotFoundException("Google ID (sub) is missing");
-        }
 
         const { user } = await loginOrCreateAccountService({
           provider: ProviderEnum.GOOGLE,
           displayName: profile.displayName,
           providerId: googleId,
-          picture: picture ?? "", 
+          picture: picture ?? "",
           email: email ?? "",
         });
-        const jwt = signJwtToken({userId:user._id});
+
+        const jwt = signJwtToken({ userId: user._id });
+
+        // خزن الـ JWT في req لاستخدامه لاحقًا في route callback
+        // @ts-ignore
         req.jwt = jwt;
 
-        done(null, user);
+        done(null, user); // تمرير user فقط → يحل خطأ TypeScript
       } catch (error) {
         done(error, false);
       }
     }
   )
 );
+
 
 passport.use(
   new LocalStrategy(
