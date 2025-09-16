@@ -26,10 +26,16 @@ import { loginMutationFn } from "@/lib/api";
 import { toast } from "@/hooks/use-toast";
 import { Loader } from "lucide-react";
 
+import { useStoreBase } from "@/store/store"; // path to your Zustand store file
+
+
+
 const SignIn = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const returnUrl = searchParams.get("returnUrl");
+  const { setAccessToken } = useStoreBase.getState();
+
 
   const { mutate, isPending } = useMutation({
     mutationFn: loginMutationFn,
@@ -57,8 +63,9 @@ const SignIn = () => {
 
     mutate(values, {
       onSuccess: (data) => {
+        const accessToken = data.access_token;
         const user = data.user;
-        console.log(user);
+        setAccessToken(accessToken);
         const decodedUrl = returnUrl ? decodeURIComponent(returnUrl) : null;
         navigate(decodedUrl || `/workspace/${user.currentWorkspace}`);
       },
