@@ -140,7 +140,7 @@ export default function CreateProjectForm({
                     </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Website Redesign"
+                        placeholder="Emergency"
                         className="!h-[48px]"
                         {...field}
                       />

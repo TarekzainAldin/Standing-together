@@ -77,11 +77,10 @@ export default function CreateWorkspaceForm({
             className="text-2xl tracking-[-0.16px] dark:text-[#fcfdffef] font-semibold mb-1.5
            text-center sm:text-left"
           >
-            Let's build a Workspace
+            Set up your team workspace
           </h1>
           <p className="text-muted-foreground text-lg leading-tight">
-            Boost your productivity by making it easier for everyone to access
-            projects in one location.
+            Organize your committees and response teams in dedicated workspaces
           </p>
         </div>
         <Form {...form}>
@@ -97,13 +96,13 @@ export default function CreateWorkspaceForm({
                     </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Taco's Co."
+                        placeholder="Emergency Response Team"
                         className="!h-[48px]"
                         {...field}
                       />
                     </FormControl>
                     <FormDescription>
-                      This is the name of your company, team or organization.
+                       This is the name of your committee or response team.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -125,13 +124,12 @@ export default function CreateWorkspaceForm({
                     <FormControl>
                       <Textarea
                         rows={6}
-                        placeholder="Our team organizes marketing projects and tasks here."
+                        placeholder="Describe your committee or team's role here"
                         {...field}
                       />
                     </FormControl>
                     <FormDescription>
-                      Get your members on board with a few words about your
-                      Workspace.
+                     Describe your workspace so your committee or team knows its purpose
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
