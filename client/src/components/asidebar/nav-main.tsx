@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Link, useLocation } from "react-router-dom";
 import useWorkspaceId from "@/hooks/use-workspace-id";
+import { cn } from "@/lib/utils";
 
 type ItemType = {
   title: string;
@@ -25,7 +26,6 @@ type ItemType = {
 export function NavMain() {
   const workspaceId = useWorkspaceId();
   const location = useLocation();
-
   const pathname = location.pathname;
 
   const items: ItemType[] = [
@@ -44,26 +44,42 @@ export function NavMain() {
       url: `/workspace/${workspaceId}/members`,
       icon: Users,
     },
-
     {
       title: "Settings",
       url: `/workspace/${workspaceId}/settings`,
       icon: Settings,
     },
   ];
+
   return (
     <SidebarGroup>
       <SidebarMenu>
-        {items.map((item) => (
-          <SidebarMenuItem key={item.title}>
-            <SidebarMenuButton isActive={item.url === pathname} asChild>
-              <Link to={item.url} className="!text-[15px]">
-                <item.icon />
-                <span>{item.title}</span>
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        ))}
+        {items.map((item) => {
+          const isActive = item.url === pathname;
+          return (
+            <SidebarMenuItem key={item.title}>
+              <SidebarMenuButton asChild>
+                <Link
+                  to={item.url}
+                  className={cn(
+                    "flex items-center gap-3 px-4 py-2 rounded-xl transition-all duration-200",
+                    "hover:bg-gradient-to-r hover:from-indigo-100 hover:to-indigo-200 hover:text-indigo-700 dark:hover:from-indigo-900 dark:hover:to-indigo-800",
+                    isActive &&
+                      "bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-md"
+                  )}
+                >
+                  <item.icon
+                    className={cn(
+                      "h-5 w-5",
+                      isActive ? "text-white" : "text-indigo-500"
+                    )}
+                  />
+                  <span className="font-medium text-sm">{item.title}</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          );
+        })}
       </SidebarMenu>
     </SidebarGroup>
   );

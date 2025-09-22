@@ -141,7 +141,9 @@ export default function CreateWorkspaceForm({
 
             <Button
               disabled={isPending}
-              className="w-full h-[40px] text-white font-semibold"
+              className="w-full h-[50px] bg-gradient-to-r from-blue-500 to-indigo-600 
+                         hover:from-blue-600 hover:to-indigo-700 text-white font-semibold 
+                         rounded-lg shadow-lg flex items-center justify-center gap-2 transition-all duration-200"
               type="submit"
             >
               {isPending && <Loader className="animate-spin" />}
