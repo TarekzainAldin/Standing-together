@@ -1,5 +1,11 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Activity, ArrowBigUp, ArrowBigDown, Loader } from "lucide-react";
+import {
+  Activity,
+  ArrowBigUp,
+  ArrowBigDown,
+  Loader,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const AnalyticsCard = (props: {
   title: string;
@@ -11,35 +17,44 @@ const AnalyticsCard = (props: {
   const getArrowIcon = () => {
     if (title === "Overdue Task") {
       return value > 0 ? (
-        <ArrowBigDown strokeWidth={2.5} className="h-4 w-4 text-red-500" />
+        <ArrowBigDown className="h-5 w-5 text-red-500" strokeWidth={2.5} />
       ) : (
-        <ArrowBigUp strokeWidth={2.5} className="h-4 w-4 text-green-500" />
+        <ArrowBigUp className="h-5 w-5 text-green-500" strokeWidth={2.5} />
       );
     }
     if (title === "Completed Task" || title === "Total Task") {
       return value > 0 ? (
-        <ArrowBigUp strokeWidth={2.5} className="h-4 w-4 text-green-500" />
+        <ArrowBigUp className="h-5 w-5 text-green-500" strokeWidth={2.5} />
       ) : (
-        <ArrowBigDown strokeWidth={2.5} className="h-4 w-4 text-red-500" />
+        <ArrowBigDown className="h-5 w-5 text-red-500" strokeWidth={2.5} />
       );
     }
     return null;
   };
+
   return (
-    <Card className="shadow-none w-full">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <div className="flex items-center gap-1">
-          <CardTitle className="text-sm font-medium">{title}</CardTitle>
-          <div className="mb-[0.2px]">{getArrowIcon()}</div>
+    <Card
+      className={cn(
+        "w-full rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-md transition-all duration-200",
+        "bg-gradient-to-br from-indigo-50 to-white dark:from-gray-900 dark:to-gray-800"
+      )}
+    >
+      <CardHeader className="flex flex-row items-center justify-between pb-2">
+        <div className="flex items-center gap-2">
+          <CardTitle className="text-base font-semibold text-gray-700 dark:text-gray-200">
+            {title}
+          </CardTitle>
+          {getArrowIcon()}
         </div>
-        <Activity
-          strokeWidth={2.5}
-          className="h-4 w-4  text-muted-foreground"
-        />
+        <Activity className="h-5 w-5 text-indigo-500 dark:text-indigo-400" strokeWidth={2.5} />
       </CardHeader>
-      <CardContent className="w-full">
-        <div className="text-3xl font-bold">
-          {isLoading ? <Loader className="w-6 h-6 animate-spin" /> : value}
+      <CardContent>
+        <div className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+          {isLoading ? (
+            <Loader className="h-6 w-6 animate-spin text-indigo-500" />
+          ) : (
+            value
+          )}
         </div>
       </CardContent>
     </Card>
