@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Check, ChevronDown, Loader, Plus } from "lucide-react";
-
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,6 +21,7 @@ import useWorkspaceId from "@/hooks/use-workspace-id";
 import useCreateWorkspaceDialog from "@/hooks/use-create-workspace-dialog";
 import { useQuery } from "@tanstack/react-query";
 import { getAllWorkspacesUserIsMemberQueryFn } from "@/lib/api";
+import { cn } from "@/lib/utils";
 
 type WorkspaceType = {
   _id: string;
@@ -31,7 +31,6 @@ type WorkspaceType = {
 export function WorkspaceSwitcher() {
   const navigate = useNavigate();
   const { isMobile } = useSidebar();
-
   const { onOpen } = useCreateWorkspaceDialog();
   const workspaceId = useWorkspaceId();
 
@@ -66,47 +65,57 @@ export function WorkspaceSwitcher() {
 
   return (
     <>
-      <SidebarGroupLabel className="w-full justify-between pr-0">
-        <span>Workspaces</span>
+      <SidebarGroupLabel className="flex justify-between items-center pr-0">
+        <span className="font-semibold">Workspaces</span>
         <button
           onClick={onOpen}
-          className="flex size-5 items-center justify-center rounded-full border"
+          className="flex h-8 w-8 items-center justify-center rounded-full border hover:bg-indigo-50 dark:hover:bg-gray-800 transition"
         >
-          <Plus className="size-3.5" />
+          <Plus className="h-4 w-4" />
         </button>
       </SidebarGroupLabel>
+
       <SidebarMenu>
         <SidebarMenuItem>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <SidebarMenuButton
                 size="lg"
-                className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground bg-gray-10"
+                className={cn(
+                  "flex items-center gap-2 p-2 rounded-lg transition-all",
+                  "hover:bg-indigo-100 dark:hover:bg-gray-800"
+                )}
               >
                 {activeWorkspace ? (
                   <>
-                    <div className="flex aspect-square size-8 items-center font-semibold justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                      {activeWorkspace?.name?.split(" ")?.[0]?.charAt(0)}
+                    <div
+                      className={cn(
+                        "flex aspect-square h-8 w-8 items-center justify-center rounded-lg font-bold",
+                        "bg-gradient-to-tr from-indigo-500 to-purple-500 text-white"
+                      )}
+                    >
+                      {activeWorkspace?.name?.split(" ")[0]?.charAt(0)}
                     </div>
-                    <div className="grid flex-1 text-left text-sm leading-tight">
-                      <span className="truncate font-semibold">
+                    <div className="grid flex-1 text-left leading-tight">
+                      <span className="truncate font-semibold text-sm">
                         {activeWorkspace?.name}
                       </span>
-                      <span className="truncate text-xs">Free</span>
+                      <span className="truncate text-xs text-muted-foreground">
+                        Free
+                      </span>
                     </div>
                   </>
                 ) : (
-                  <div className="grid flex-1 text-left text-sm leading-tight">
-                    <span className="truncate font-semibold">
-                      No Workspace selected
-                    </span>
-                  </div>
+                  <span className="text-sm text-muted-foreground">
+                    No Workspace selected
+                  </span>
                 )}
-                <ChevronDown className="ml-auto" />
+                <ChevronDown className="ml-auto w-4 h-4 text-muted-foreground" />
               </SidebarMenuButton>
             </DropdownMenuTrigger>
+
             <DropdownMenuContent
-              className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
+              className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900"
               align="start"
               side={isMobile ? "bottom" : "right"}
               sideOffset={4}
@@ -114,37 +123,52 @@ export function WorkspaceSwitcher() {
               <DropdownMenuLabel className="text-xs text-muted-foreground">
                 Workspaces
               </DropdownMenuLabel>
-              {isPending ? <Loader className=" w-5 h-5 animate-spin" /> : null}
+
+              {isPending && (
+                <Loader className="w-5 h-5 animate-spin place-self-center my-2" />
+              )}
 
               {workspaces?.map((workspace) => (
                 <DropdownMenuItem
                   key={workspace._id}
                   onClick={() => onSelect(workspace)}
-                  className="gap-2 p-2 !cursor-pointer"
+                  className={cn(
+                    "flex items-center gap-2 px-2 py-1 rounded-md transition-colors",
+                    workspace._id === workspaceId
+                      ? "bg-indigo-500 text-white"
+                      : "hover:bg-indigo-100 dark:hover:bg-gray-800"
+                  )}
                 >
-                  <div className="flex size-6 items-center justify-center rounded-sm border">
-                    {workspace?.name?.split(" ")?.[0]?.charAt(0)}
+                  <div
+                    className={cn(
+                      "flex h-6 w-6 items-center justify-center rounded-sm border font-semibold",
+                      workspace._id === workspaceId
+                        ? "bg-white text-indigo-500 border-white"
+                        : "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-200"
+                    )}
+                  >
+                    {workspace?.name?.split(" ")[0]?.charAt(0)}
                   </div>
-                  {workspace.name}
-
+                  <span className="flex-1 truncate">{workspace.name}</span>
                   {workspace._id === workspaceId && (
-                    <DropdownMenuShortcut className="tracking-normal !opacity-100">
+                    <DropdownMenuShortcut className="!opacity-100">
                       <Check className="w-4 h-4" />
                     </DropdownMenuShortcut>
                   )}
                 </DropdownMenuItem>
               ))}
+
               <DropdownMenuSeparator />
               <DropdownMenuItem
-                className="gap-2 p-2 !cursor-pointer"
+                className="flex items-center gap-2 px-2 py-1 rounded-md hover:bg-indigo-100 dark:hover:bg-gray-800"
                 onClick={onOpen}
               >
-                <div className="flex size-6 items-center justify-center rounded-md border bg-background">
-                  <Plus className="size-4" />
+                <div className="flex h-6 w-6 items-center justify-center rounded-md border bg-background">
+                  <Plus className="w-4 h-4" />
                 </div>
-                <div className="font-medium text-muted-foreground">
+                <span className="text-sm text-muted-foreground font-medium">
                   Add workspace
-                </div>
+                </span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
