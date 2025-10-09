@@ -42,11 +42,11 @@ export const getAvatarColor = (initials: string): string => {
 };
 
 export const getAvatarFallbackText = (name: string) => {
-  if (!name) return "NA";
+  if (!name) return "TA";
   const initials = name
     .split(" ")
     .map((n) => n.charAt(0).toUpperCase())
     .join("")
     .slice(0, 2); // Ensure only two initials
-  return initials || "NA";
+  return initials || "TA";
 };
