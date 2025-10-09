@@ -8,7 +8,9 @@ const CreateProjectDialog = () => {
     <div>
       <Dialog modal={true} open={open} onOpenChange={onClose}>
         <DialogContent className="sm:max-w-lg border-0">
-          <CreateProjectForm />
+          <CreateProjectForm onClose={function (): void {
+            throw new Error("Function not implemented.");
+          } } />
         </DialogContent>
       </Dialog>
     </div>
