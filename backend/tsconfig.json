@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "commonjs",
-    "types": ["node"],
+    "types": ["node", "jest"],
 
     "sourceMap": true,
     "declaration": true,
