@@ -20,6 +20,7 @@ import projectRoutes from "./routes/project.route";
 import taskRoutes from "./routes/task.route";
 import { passportAuthenticateJWT } from "./config/passport.config";
 // import { BadRequestException } from "./utils/appError";
+import reportRoutes from "../src/routes/report.route";
 
 const app = express();
 const BASE_PATH = config.BASE_PATH;
@@ -65,7 +66,7 @@ app.use(`${BASE_PATH}/workspace`, passportAuthenticateJWT, workspaceRoutes);
 app.use(`${BASE_PATH}/member`, passportAuthenticateJWT, memberRoutes);
 app.use(`${BASE_PATH}/project`, passportAuthenticateJWT, projectRoutes);
 app.use(`${BASE_PATH}/task`, passportAuthenticateJWT, taskRoutes);
-
+app.use(`${BASE_PATH}/reports`,reportRoutes);
 app.use(errorHandler);
 
 app.listen(config.PORT, async () => {
