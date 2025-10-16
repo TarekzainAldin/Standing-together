@@ -261,3 +261,43 @@ export const deleteTaskMutationFn = async ({
   );
   return response.data;
 };
+// ******** REPORTS *********
+
+// export const generateReportQueryFn = async (workspaceId?: string) => {
+//   const url = workspaceId
+//     ? `/reports/generate?workspaceId=${workspaceId}`
+//     : `/reports/generate`;
+
+//   const response = await API.get(url, {
+//     responseType: "blob", // ضروري لتنزيل ملف Excel
+//   });
+
+//   // إنشاء رابط تحميل مباشر
+//   const blob = new Blob([response.data], {
+//     type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+//   });
+//   const link = document.createElement("a");
+//   const today = new Date().toISOString().split("T")[0];
+//   const fileName = workspaceId
+//     ? `Report_${workspaceId}_${today}.xlsx`
+//     : `Report_AllWorkspaces_${today}.xlsx`;
+
+//   link.href = window.URL.createObjectURL(blob);
+//   link.download = fileName;
+//   link.click();
+// };
+// ******** REPORTS *********
+
+export const generateReportQueryFn = async (workspaceId?: string) => {
+  const url = workspaceId
+    ? `/reports/generate?workspaceId=${workspaceId}`
+    : `/reports/generate`;
+
+  // ✅ نحدد نوع الاستجابة blob لأننا ننتظر ملف Excel
+  const response = await API.get(url, {
+    responseType: "blob",
+  });
+
+  // ✅ نرجع response حتى يقدر الـ hook يتعامل معه
+  return response;
+};
