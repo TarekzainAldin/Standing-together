@@ -17,9 +17,7 @@ import {
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -31,20 +29,20 @@ import { NavProjects } from "./nav-projects";
 import { Separator } from "../ui/separator";
 import useWorkspaceId from "@/hooks/use-workspace-id";
 import { useAuthContext } from "@/context/auth-provider";
-import { useReport } from "@/hooks/useReport"; // ✅ استيراد hook التقرير
+import { useReport } from "@/hooks/useReport";
 
 const Asidebar = () => {
   const { isLoading, user } = useAuthContext();
   const { open } = useSidebar();
   const workspaceId = useWorkspaceId();
-  const { handleDownloadReport, loading } = useReport(); // ✅ استخدام الـ hook
+  const { handleDownloadReport, loading } = useReport();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
       <Sidebar
         collapsible="icon"
-        className="bg-gradient-to-b from-indigo-50 via-purple-50 to-pink-50 
+        className="bg-gradient-to-b from-indigo-50 via-purple-50 to-pink-50
                    dark:from-gray-950 dark:via-purple-950 dark:to-gray-900 shadow-xl"
       >
         {/* ===== HEADER ===== */}
@@ -54,8 +52,8 @@ const Asidebar = () => {
             {open && (
               <Link
                 to={`/workspace/${workspaceId}`}
-                className="hidden md:flex ml-2 items-center gap-2 self-center 
-                           font-bold text-lg bg-gradient-to-r from-indigo-500 to-purple-600 
+                className="hidden md:flex ml-2 items-center gap-2 self-center
+                           font-bold text-lg bg-gradient-to-r from-indigo-500 to-purple-600
                            bg-clip-text text-transparent"
               >
                 STANDING TOGETHER.
@@ -72,24 +70,32 @@ const Asidebar = () => {
               <Separator className="my-3" />
               <NavMain />
 
-              {/* ✅ زر تحميل التقرير */}
-              <SidebarMenuButton
-  className="flex items-center gap-2 text-indigo-600 hover:bg-indigo-100 dark:text-indigo-300 dark:hover:bg-gray-800 transition-all rounded-lg"
-  onClick={() => handleDownloadReport(workspaceId)} // مساحة حالية
-  disabled={loading}
->
-  <FileSpreadsheet className="w-5 h-5" />
-  {loading ? "Generating..." : "Download Current Workspace Report"}
-</SidebarMenuButton>
-
-<SidebarMenuButton
-  className="flex items-center gap-2 text-indigo-600 hover:bg-indigo-100 dark:text-indigo-300 dark:hover:bg-gray-800 transition-all rounded-lg mt-2"
-  onClick={() => handleDownloadReport()} // بدون workspaceId → كل المساحات
-  disabled={loading}
->
-  <FileSpreadsheet className="w-5 h-5" />
-  {loading ? "Generating..." : "Download All Workspaces Report"}
-</SidebarMenuButton>
+              {/* ===== Dropdown تحميل التقرير ===== */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <SidebarMenuButton
+                    className="flex items-center gap-2 text-indigo-600 hover:bg-indigo-100
+                               dark:text-indigo-300 dark:hover:bg-gray-800 transition-all rounded-lg"
+                    disabled={loading}
+                  >
+                    <FileSpreadsheet className="w-5 h-5" />
+                    {loading ? "Generating..." : "Download Report"}
+                  </SidebarMenuButton>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                  className="w-56 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700
+                             bg-white dark:bg-gray-900"
+                >
+                  <DropdownMenuItem
+                    onClick={() => handleDownloadReport(workspaceId)}
+                  >
+                    Current Workspace
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => handleDownloadReport()}>
+                    All Workspaces
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
 
               <Separator className="my-3" />
               <NavProjects />
@@ -116,7 +122,7 @@ const Asidebar = () => {
                       <Avatar className="h-9 w-9 rounded-full shadow">
                         <AvatarImage src={user?.profilePicture || ""} />
                         <AvatarFallback
-                          className="rounded-full border border-gray-400 dark:border-gray-600 
+                          className="rounded-full border border-gray-400 dark:border-gray-600
                                      bg-gradient-to-r from-indigo-500 to-purple-600 text-white"
                         >
                           {user?.name?.split(" ")?.[0]?.charAt(0)}
@@ -136,15 +142,13 @@ const Asidebar = () => {
                   </DropdownMenuTrigger>
 
                   <DropdownMenuContent
-                    className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg 
-                               shadow-lg border border-gray-200 dark:border-gray-700 
+                    className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg
+                               shadow-lg border border-gray-200 dark:border-gray-700
                                bg-white dark:bg-gray-900"
                     side="bottom"
                     align="start"
                     sideOffset={4}
                   >
-                    <DropdownMenuGroup></DropdownMenuGroup>
-                    <DropdownMenuSeparator />
                     <DropdownMenuItem
                       onClick={() => setIsOpen(true)}
                       className="text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-gray-800"
