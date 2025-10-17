@@ -18,8 +18,10 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { changeWorkspaceMemberRoleMutationFn } from "@/lib/api";
 import { toast } from "@/hooks/use-toast";
 import { Permissions } from "@/constant";
+import { useTranslation } from "react-i18next";
 
 const AllMembers = () => {
+  const { t } = useTranslation();
   const { user, hasPermission } = useAuthContext();
   const canChangeMemberRole = hasPermission(Permissions.CHANGE_MEMBER_ROLE);
 
@@ -47,22 +49,22 @@ const AllMembers = () => {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ["members", workspaceId] });
         toast({
-          title: "Success",
-          description: "Member's role changed successfully",
+          title: t("success"),
+          description: t("memberRoleChanged"),
           variant: "success",
         });
       },
       onError: (error: unknown) => {
         if (error instanceof Error) {
           toast({
-            title: "Error",
+            title: t("error"),
             description: error.message,
             variant: "destructive",
           });
         } else {
           toast({
-            title: "Error",
-            description: "An unknown error occurred.",
+            title: t("error"),
+            description: t("unknownError"),
             variant: "destructive",
           });
         }
@@ -82,15 +84,25 @@ const AllMembers = () => {
         const avatarColor = getAvatarColor(name);
 
         return (
-          <div key={member.userId._id} className="flex items-center justify-between space-x-4">
+          <div
+            key={member.userId._id}
+            className="flex items-center justify-between space-x-4"
+          >
             <div className="flex items-center space-x-4">
               <Avatar className="h-8 w-8">
-                <AvatarImage src={member.userId?.profilePicture || ""} alt="Image" />
-                <AvatarFallback className={avatarColor}>{initials}</AvatarFallback>
+                <AvatarImage
+                  src={member.userId?.profilePicture || ""}
+                  alt="Image"
+                />
+                <AvatarFallback className={avatarColor}>
+                  {initials}
+                </AvatarFallback>
               </Avatar>
               <div>
                 <p className="text-sm font-medium leading-none">{name}</p>
-                <p className="text-sm text-muted-foreground">{member.userId.email}</p>
+                <p className="text-sm text-muted-foreground">
+                  {member.userId.email}
+                </p>
               </div>
             </div>
 
@@ -101,7 +113,11 @@ const AllMembers = () => {
                     variant="outline"
                     size="sm"
                     className="ml-auto min-w-24 capitalize disabled:opacity-95 disabled:pointer-events-none"
-                    disabled={isLoading || !canChangeMemberRole || member.userId._id === user?._id}
+                    disabled={
+                      isLoading ||
+                      !canChangeMemberRole ||
+                      member.userId._id === user?._id
+                    }
                   >
                     {member.role.name?.toLowerCase()}{" "}
                     {canChangeMemberRole && member.userId._id !== user?._id && (
@@ -114,7 +130,7 @@ const AllMembers = () => {
                   <PopoverContent className="p-0" align="end">
                     <Command>
                       <CommandInput
-                        placeholder="Select new role..."
+                        placeholder={t("selectNewRole")}
                         disabled={isLoading}
                         className="disabled:pointer-events-none"
                       />
@@ -123,7 +139,7 @@ const AllMembers = () => {
                           <Loader className="w-8 h-8 animate-spin place-self-center flex my-4" />
                         ) : (
                           <>
-                            <CommandEmpty>No roles found.</CommandEmpty>
+                            <CommandEmpty>{t("noRolesFound")}</CommandEmpty>
                             <CommandGroup>
                               {roles.map(
                                 (role) =>
@@ -132,14 +148,18 @@ const AllMembers = () => {
                                       key={role._id}
                                       disabled={isLoading}
                                       className="disabled:pointer-events-none gap-1 mb-1 flex flex-col items-start px-4 py-2 cursor-pointer"
-                                      onSelect={() => handleSelect(role._id, member.userId._id)}
+                                      onSelect={() =>
+                                        handleSelect(role._id, member.userId._id)
+                                      }
                                     >
-                                      <p className="capitalize">{role.name?.toLowerCase()}</p>
+                                      <p className="capitalize">
+                                        {role.name?.toLowerCase()}
+                                      </p>
                                       <p className="text-sm text-muted-foreground">
                                         {role.name === "ADMIN" &&
-                                          "Can view, create, edit tasks, project and manage settings."}
+                                          t("adminRoleDescription")}
                                         {role.name === "MEMBER" &&
-                                          "Can view, edit only tasks created by them."}
+                                          t("memberRoleDescription")}
                                       </p>
                                     </CommandItem>
                                   )
