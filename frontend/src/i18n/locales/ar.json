@@ -1,0 +1,95 @@
+{
+  "sidebar": {
+    "download_report": "تحميل التقرير",
+    "current_workspace": "مساحة العمل الحالية",
+    "all_workspaces": "جميع مساحات العمل",
+    "logout": "تسجيل الخروج",
+    "generating": "جاري الإنشاء..."
+  },
+  "nav": {
+    "dashboard": "لوحة التحكم",
+    "tasks": "المهام",
+    "members": "الأعضاء",
+    "settings": "الإعدادات"
+  },
+  "projects": {
+    "label": "المشاريع",
+    "success": "تم حذف المشروع بنجاح",
+    "error": "حدث خطأ",
+    "error_occurred": "حدث خطأ أثناء جلب المشاريع",
+    "no_projects": "لا يوجد مشاريع في مساحة العمل هذه بعد.",
+    "create_project": "إنشاء مشروع",
+    "view": "عرض المشروع",
+    "delete": "حذف المشروع",
+    "delete_title": "حذف المشروع",
+    "delete_description": "هل أنت متأكد أنك تريد حذف {{name}}؟ هذا الإجراء لا يمكن التراجع عنه.",
+    "cancel": "إلغاء",
+    "more": "المزيد",
+    "loading": "جاري التحميل..."
+  },
+  "workspace": {
+    "label": "مساحات العمل",
+    "no_selected": "لم يتم اختيار أي مساحة",
+    "free": "مجاني",
+    "add": "إضافة مساحة"
+  },
+  "workspace_form": {
+    "title": "إعداد مساحة العمل لفريقك",
+    "description": "نظّم لجانك وفرق الاستجابة في مساحات عمل مخصصة",
+    "name_label": "اسم مساحة العمل",
+    "name_placeholder": "فريق الاستجابة للطوارئ",
+    "name_description": "هذا هو اسم لجنتك أو فريق الاستجابة الخاص بك.",
+    "name_required": "اسم مساحة العمل مطلوب",
+    "description_label": "وصف مساحة العمل",
+    "description_placeholder": "صف دور لجنتك أو فريقك هنا",
+    "description_description": "صف مساحة العمل الخاصة بك حتى يعرف فريقك هدفها",
+    "optional": "اختياري",
+    "create_button": "إنشاء مساحة العمل",
+    "error_title": "خطأ"
+  },
+  "edit_workspace_form": {
+    "title": "تعديل مساحة العمل",
+    "name_label": "اسم مساحة العمل",
+    "name_placeholder": "فريق الاستجابة للطوارئ",
+    "name_required": "اسم مساحة العمل مطلوب",
+    "description_label": "وصف مساحة العمل",
+    "description_placeholder": "صف دور لجنتك في إدارة الكوارث.",
+    "description_optional": "اختياري",
+    "update_button": "تحديث مساحة العمل",
+    "error_title": "خطأ"
+  },
+  "analytics": {
+    "total_tasks": "إجمالي المهام",
+    "overdue_tasks": "المهام المتأخرة",
+    "completed_tasks": "المهام المكتملة"
+  },
+  "breadcrumb": {
+    "dashboard": "لوحة التحكم",
+    "project": "المشروع",
+    "settings": "الإعدادات",
+    "tasks": "المهام",
+    "members": "الأعضاء"
+  },
+  "delete_workspace_form": {
+    "title": "حذف مساحة العمل",
+    "description": "حذف مساحة العمل إجراء دائم ولا يمكن التراجع عنه. سيتم حذف جميع البيانات المرتبطة بها.",
+    "delete_button": "حذف مساحة العمل",
+    "confirm_title": "حذف مساحة العمل {{name}}",
+    "confirm_description": "هل أنت متأكد أنك تريد الحذف؟ هذا الإجراء لا يمكن التراجع عنه.",
+    "confirm_button": "حذف",
+    "cancel_button": "إلغاء",
+    "error_title": "خطأ"
+  },
+  "members": {
+    "title": "الأعضاء",
+    "loading": "جارٍ التحميل...",
+    "no_roles": "لا توجد أدوار متاحة.",
+    "role_select_placeholder": "اختر دورًا جديدًا...",
+    "admin_description": "يمكنه عرض، إنشاء، تعديل المهام والمشاريع وإدارة الإعدادات.",
+    "member_description": "يمكنه عرض وتعديل المهام التي قام بإنشائها فقط.",
+    "success_change_role": "تم تغيير دور العضو بنجاح",
+    "error_change_role": "حدث خطأ أثناء تغيير دور العضو",
+    "button_change_role": "تغيير الدور"
+  }
+
+}

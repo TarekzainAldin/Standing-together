@@ -1,0 +1,82 @@
+{
+  "sidebar": {
+    "download_report": "Download Report",
+    "current_workspace": "Current Workspace",
+    "all_workspaces": "All Workspaces",
+    "logout": "Log out",
+    "generating": "Generating..."
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "tasks": "Tasks",
+    "members": "Members",
+    "settings": "Settings",
+    "projects": "Projects"
+  },
+  "projects": {
+    "no_projects": "There are no projects in this workspace yet.",
+    "create_project": "Create a project",
+    "view_project": "View Project",
+    "delete_project": "Delete Project",
+    "loading": "Loading...",
+    "more": "More",
+    "confirm_delete_title": "Delete Project",
+    "confirm_delete_description": "Are you sure you want to delete {{name}}? This action cannot be undone.",
+    "confirm_delete_button": "Delete",
+    "cancel": "Cancel"
+  },
+  "workspace": {
+  "label": "Workspaces",
+  "no_selected": "No Workspace selected",
+  "free": "Free",
+  "add": "Add workspace"
+},
+"workspace_form": {
+    "title": "Set up your team workspace",
+    "description": "Organize your committees and response teams in dedicated workspaces",
+    "name_label": "Workspace name",
+    "name_placeholder": "Emergency Response Team",
+    "name_description": "This is the name of your committee or response team.",
+    "name_required": "Workspace name is required",
+    "description_label": "Workspace description",
+    "description_placeholder": "Describe your committee or team's role here",
+    "description_description": "Describe your workspace so your committee or team knows its purpose",
+    "optional": "Optional",
+    "create_button": "Create Workspace",
+    "error_title": "Error"
+  },
+  "analytics": {
+    "total_tasks": "Total Tasks",
+    "overdue_tasks": "Overdue Tasks",
+    "completed_tasks": "Completed Tasks"
+  },
+  "breadcrumb": {
+    "dashboard": "Dashboard",
+    "project": "Project",
+    "settings": "Settings",
+    "tasks": "Tasks",
+    "members": "Members"
+  },
+   "delete_workspace_form": {
+    "title": "Delete Workspace",
+    "description": "Deleting a workspace is permanent and cannot be undone. All associated data will be removed.",
+    "delete_button": "Delete Workspace",
+    "confirm_title": "Delete {{name}} Workspace",
+    "confirm_description": "Are you sure you want to delete? This action cannot be undone.",
+    "confirm_button": "Delete",
+    "cancel_button": "Cancel",
+    "error_title": "Error"
+  },
+  "members": {
+    "title": "Members",
+    "loading": "Loading...",
+    "no_roles": "No roles found.",
+    "role_select_placeholder": "Select new role...",
+    "admin_description": "Can view, create, edit tasks, projects and manage settings.",
+    "member_description": "Can view and edit only tasks created by them.",
+    "success_change_role": "Member's role changed successfully",
+    "error_change_role": "Error occurred while changing member's role",
+    "button_change_role": "Change Role"
+  }
+
+}

@@ -22,6 +22,7 @@ import useCreateWorkspaceDialog from "@/hooks/use-create-workspace-dialog";
 import { useQuery } from "@tanstack/react-query";
 import { getAllWorkspacesUserIsMemberQueryFn } from "@/lib/api";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "react-i18next";
 
 type WorkspaceType = {
   _id: string;
@@ -29,6 +30,7 @@ type WorkspaceType = {
 };
 
 export function WorkspaceSwitcher() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { isMobile } = useSidebar();
   const { onOpen } = useCreateWorkspaceDialog();
@@ -66,7 +68,7 @@ export function WorkspaceSwitcher() {
   return (
     <>
       <SidebarGroupLabel className="flex justify-between items-center pr-0">
-        <span className="font-semibold">Workspaces</span>
+        <span className="font-semibold">{t("workspace.label")}</span>
         <button
           onClick={onOpen}
           className="flex h-8 w-8 items-center justify-center rounded-full border hover:bg-indigo-50 dark:hover:bg-gray-800 transition"
@@ -101,13 +103,13 @@ export function WorkspaceSwitcher() {
                         {activeWorkspace?.name}
                       </span>
                       <span className="truncate text-xs text-muted-foreground">
-                        Free
+                        {t("workspace.free")}
                       </span>
                     </div>
                   </>
                 ) : (
                   <span className="text-sm text-muted-foreground">
-                    No Workspace selected
+                    {t("workspace.no_selected")}
                   </span>
                 )}
                 <ChevronDown className="ml-auto w-4 h-4 text-muted-foreground" />
@@ -121,7 +123,7 @@ export function WorkspaceSwitcher() {
               sideOffset={4}
             >
               <DropdownMenuLabel className="text-xs text-muted-foreground">
-                Workspaces
+                {t("workspace.label")}
               </DropdownMenuLabel>
 
               {isPending && (
@@ -167,7 +169,7 @@ export function WorkspaceSwitcher() {
                   <Plus className="w-4 h-4" />
                 </div>
                 <span className="text-sm text-muted-foreground font-medium">
-                  Add workspace
+                  {t("workspace.add")}
                 </span>
               </DropdownMenuItem>
             </DropdownMenuContent>
