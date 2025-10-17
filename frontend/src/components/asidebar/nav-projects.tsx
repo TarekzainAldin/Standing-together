@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
@@ -37,8 +39,10 @@ import { toast } from "@/hooks/use-toast";
 import useGetProjectsInWorkspaceQuery from "@/hooks/api/use-get-projects";
 import { PaginationType } from "@/types/api.type";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "react-i18next";
 
 export function NavProjects() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const pathname = location.pathname;
@@ -75,12 +79,16 @@ export function NavProjects() {
       {
         onSuccess: (data) => {
           queryClient.invalidateQueries({ queryKey: ["allprojects", workspaceId] });
-          toast({ title: "Success", description: data.message, variant: "success" });
+          toast({ title: t("projects.success"), description: data.message, variant: "success" });
           navigate(`/workspace/${workspaceId}`);
           setTimeout(() => onCloseDialog(), 100);
         },
-        onError: (error) => {
-          toast({ title: "Error", description: error.message, variant: "destructive" });
+        onError: (error: unknown) => {
+          if (error instanceof Error) {
+            toast({ title: t("projects.error"), description: error.message, variant: "destructive" });
+          } else {
+            toast({ title: t("projects.error"), description: String(error), variant: "destructive" });
+          }
         },
       }
     );
@@ -90,7 +98,7 @@ export function NavProjects() {
     <>
       <SidebarGroup className="group-data-[collapsible=icon]:hidden">
         <SidebarGroupLabel className="flex justify-between items-center pr-0">
-          <span className="font-semibold text-sm">Projects</span>
+          <span className="font-semibold text-sm">{t("projects.label")}</span>
           <PermissionsGuard requiredPermission={Permissions.CREATE_PROJECT}>
             <button
               onClick={onOpen}
@@ -103,12 +111,12 @@ export function NavProjects() {
         </SidebarGroupLabel>
 
         <SidebarMenu className="flex flex-col gap-2 p-2 max-h-[360px] overflow-y-auto scrollbar">
-          {isError && <div className="text-red-500 text-sm">Error occurred</div>}
+          {isError && <div className="text-red-500 text-sm">{t("projects.error_occurred")}</div>}
           {isPending && <Loader className="w-5 h-5 animate-spin place-self-center" />}
 
           {!isPending && projects.length === 0 ? (
             <div className="p-2 text-center text-xs text-muted-foreground">
-              <p>There are no projects in this workspace yet.</p>
+              <p>{t("projects.no_projects")}</p>
               <PermissionsGuard requiredPermission={Permissions.CREATE_PROJECT}>
                 <Button
                   variant="link"
@@ -116,7 +124,7 @@ export function NavProjects() {
                   className="mt-2 text-sm underline font-semibold flex items-center justify-center gap-1 mx-auto"
                   onClick={onOpen}
                 >
-                  Create a project <ArrowRight className="w-4 h-4" />
+                  {t("projects.create_project")} <ArrowRight className="w-4 h-4" />
                 </Button>
               </PermissionsGuard>
             </div>
@@ -155,7 +163,7 @@ export function NavProjects() {
                         className="opacity-0 group-hover:opacity-100 transition"
                       >
                         <MoreHorizontal />
-                        <span className="sr-only">More</span>
+                        <span className="sr-only">{t("projects.more")}</span>
                       </SidebarMenuAction>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent
@@ -164,7 +172,7 @@ export function NavProjects() {
                       align={isMobile ? "end" : "start"}
                     >
                       <DropdownMenuItem onClick={() => navigate(projectUrl)}>
-                        <Folder className="text-muted-foreground" /> View Project
+                        <Folder className="text-muted-foreground" /> {t("projects.view")}
                       </DropdownMenuItem>
 
                       <PermissionsGuard requiredPermission={Permissions.DELETE_PROJECT}>
@@ -173,7 +181,7 @@ export function NavProjects() {
                           disabled={isLoading}
                           onClick={() => onOpenDialog(item)}
                         >
-                          <Trash2 className="text-muted-foreground" /> Delete Project
+                          <Trash2 className="text-muted-foreground" /> {t("projects.delete")}
                         </DropdownMenuItem>
                       </PermissionsGuard>
                     </DropdownMenuContent>
@@ -191,7 +199,7 @@ export function NavProjects() {
                 onClick={fetchNextPage}
               >
                 <MoreHorizontal className="text-sidebar-foreground/70" />
-                <span>{isFetching ? "Loading..." : "More"}</span>
+                <span>{isFetching ? t("projects.loading") : t("projects.more")}</span>
               </SidebarMenuButton>
             </SidebarMenuItem>
           )}
@@ -203,10 +211,10 @@ export function NavProjects() {
         isLoading={isLoading}
         onClose={onCloseDialog}
         onConfirm={handleConfirm}
-        title="Delete Project"
-        description={`Are you sure you want to delete ${context?.name || "this project"}? This action cannot be undone.`}
-        confirmText="Delete"
-        cancelText="Cancel"
+        title={t("projects.delete_title")}
+        description={t("projects.delete_description", { name: context?.name })}
+        confirmText={t("projects.delete")}
+        cancelText={t("projects.cancel")}
       />
     </>
   );

@@ -16,6 +16,7 @@ import {
 import { Link, useLocation } from "react-router-dom";
 import useWorkspaceId from "@/hooks/use-workspace-id";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "react-i18next";
 
 type ItemType = {
   title: string;
@@ -24,28 +25,29 @@ type ItemType = {
 };
 
 export function NavMain() {
+  const { t } = useTranslation();
   const workspaceId = useWorkspaceId();
   const location = useLocation();
   const pathname = location.pathname;
 
   const items: ItemType[] = [
     {
-      title: "Dashboard",
+      title: t("nav.dashboard"),
       url: `/workspace/${workspaceId}`,
       icon: LayoutDashboard,
     },
     {
-      title: "Tasks",
+      title: t("nav.tasks"),
       url: `/workspace/${workspaceId}/tasks`,
       icon: CheckCircle,
     },
     {
-      title: "Members",
+      title: t("nav.members"),
       url: `/workspace/${workspaceId}/members`,
       icon: Users,
     },
     {
-      title: "Settings",
+      title: t("nav.settings"),
       url: `/workspace/${workspaceId}/settings`,
       icon: Settings,
     },
