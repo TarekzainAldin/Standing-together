@@ -7,6 +7,9 @@ import App from "./App.tsx";
 import QueryProvider from "./context/query-provider.tsx";
 import { Toaster } from "./components/ui/toaster.tsx";
 
+// ✅ استدعاء i18n قبل App
+import "./i18n/i18n"; 
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryProvider>

@@ -18,24 +18,23 @@ import { createWorkspaceMutationFn } from "@/lib/api";
 import { useNavigate } from "react-router-dom";
 import { toast } from "@/hooks/use-toast";
 import { Loader } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
-export default function CreateWorkspaceForm({
-  onClose,
-}: {
+interface CreateWorkspaceFormProps {
   onClose: () => void;
-}) {
-  const navigate = useNavigate();
+}
 
+const CreateWorkspaceForm: React.FC<CreateWorkspaceFormProps> = ({ onClose }) => {
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const { t } = useTranslation();
 
   const { mutate, isPending } = useMutation({
     mutationFn: createWorkspaceMutationFn,
   });
 
   const formSchema = z.object({
-    name: z.string().trim().min(1, {
-      message: "Workspace name is required",
-    }),
+    name: z.string().trim().min(1, { message: t("workspace_form.name_required") }),
     description: z.string().trim(),
   });
 
@@ -49,20 +48,19 @@ export default function CreateWorkspaceForm({
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     if (isPending) return;
+
     mutate(values, {
       onSuccess: (data) => {
-        queryClient.resetQueries({
-          queryKey: ["userWorkspaces"],
-        });
-
+        queryClient.resetQueries({ queryKey: ["userWorkspaces"] });
         const workspace = data.workspace;
         onClose();
         navigate(`/workspace/${workspace._id}`);
       },
-      onError: (error) => {
+      onError: (error: unknown) => {
+        const message = error instanceof Error ? error.message : String(error);
         toast({
-          title: "Error",
-          description: error.message,
+          title: t("workspace_form.error_title"),
+          description: message,
           variant: "destructive",
         });
       },
@@ -73,16 +71,14 @@ export default function CreateWorkspaceForm({
     <main className="w-full flex flex-row min-h-[590px] h-auto max-w-full">
       <div className="h-full px-10 py-10 flex-1">
         <div className="mb-5">
-          <h1
-            className="text-2xl tracking-[-0.16px] dark:text-[#fcfdffef] font-semibold mb-1.5
-           text-center sm:text-left"
-          >
-            Set up your team workspace
+          <h1 className="text-2xl tracking-[-0.16px] dark:text-[#fcfdffef] font-semibold mb-1.5 text-center sm:text-left">
+            {t("workspace_form.title")}
           </h1>
           <p className="text-muted-foreground text-lg leading-tight">
-            Organize your committees and response teams in dedicated workspaces
+            {t("workspace_form.description")}
           </p>
         </div>
+
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <div className="mb-4">
@@ -92,23 +88,24 @@ export default function CreateWorkspaceForm({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="dark:text-[#f1f7feb5] text-sm">
-                      Workspace name
+                      {t("workspace_form.name_label")}
                     </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Emergency Response Team"
+                        placeholder={t("workspace_form.name_placeholder")}
                         className="!h-[48px]"
                         {...field}
                       />
                     </FormControl>
                     <FormDescription>
-                       This is the name of your committee or response team.
+                      {t("workspace_form.name_description")}
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
             </div>
+
             <div className="mb-4">
               <FormField
                 control={form.control}
@@ -116,20 +113,20 @@ export default function CreateWorkspaceForm({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="dark:text-[#f1f7feb5] text-sm">
-                      Workspace description
+                      {t("workspace_form.description_label")}
                       <span className="text-xs font-extralight ml-2">
-                        Optional
+                        {t("workspace_form.optional")}
                       </span>
                     </FormLabel>
                     <FormControl>
                       <Textarea
                         rows={6}
-                        placeholder="Describe your committee or team's role here"
+                        placeholder={t("workspace_form.description_placeholder")}
                         {...field}
                       />
                     </FormControl>
                     <FormDescription>
-                     Describe your workspace so your committee or team knows its purpose
+                      {t("workspace_form.description_description")}
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -139,22 +136,22 @@ export default function CreateWorkspaceForm({
 
             <Button
               disabled={isPending}
-              className="w-full h-[50px] bg-gradient-to-r from-blue-500 to-indigo-600 
-                         hover:from-blue-600 hover:to-indigo-700 text-white font-semibold 
-                         rounded-lg shadow-lg flex items-center justify-center gap-2 transition-all duration-200"
+              className="w-full h-[50px] bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold rounded-lg shadow-lg flex items-center justify-center gap-2 transition-all duration-200"
               type="submit"
             >
               {isPending && <Loader className="animate-spin" />}
-              Create Workspace
+              {t("workspace_form.create_button")}
             </Button>
           </form>
         </Form>
       </div>
+
       <div
         className="relative flex-1 shrink-0 hidden bg-muted md:block
-      bg-[url('/images/workspace.jpg')] bg-cover bg-center h-full
-      "
+      bg-[url('/images/workspace.jpg')] bg-cover bg-center h-full"
       />
     </main>
   );
-}
+};
+
+export default CreateWorkspaceForm;

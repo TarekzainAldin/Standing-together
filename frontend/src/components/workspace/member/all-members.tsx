@@ -1,8 +1,6 @@
 import { ChevronDown, Loader } from "lucide-react";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-
 import {
   Command,
   CommandEmpty,
@@ -11,11 +9,7 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { getAvatarColor, getAvatarFallbackText } from "@/lib/helper";
 import { useAuthContext } from "@/context/auth-provider";
 import useWorkspaceId from "@/hooks/use-workspace-id";
@@ -24,9 +18,9 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { changeWorkspaceMemberRoleMutationFn } from "@/lib/api";
 import { toast } from "@/hooks/use-toast";
 import { Permissions } from "@/constant";
+
 const AllMembers = () => {
   const { user, hasPermission } = useAuthContext();
-
   const canChangeMemberRole = hasPermission(Permissions.CHANGE_MEMBER_ROLE);
 
   const queryClient = useQueryClient();
@@ -51,54 +45,55 @@ const AllMembers = () => {
     };
     mutate(payload, {
       onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: ["members", workspaceId],
-        });
+        queryClient.invalidateQueries({ queryKey: ["members", workspaceId] });
         toast({
           title: "Success",
           description: "Member's role changed successfully",
           variant: "success",
         });
       },
-      onError: (error) => {
-        toast({
-          title: "Error",
-          description: error.message,
-          variant: "destructive",
-        });
+      onError: (error: unknown) => {
+        if (error instanceof Error) {
+          toast({
+            title: "Error",
+            description: error.message,
+            variant: "destructive",
+          });
+        } else {
+          toast({
+            title: "Error",
+            description: "An unknown error occurred.",
+            variant: "destructive",
+          });
+        }
       },
     });
   };
 
   return (
     <div className="grid gap-6 pt-2">
-      {isPending ? (
+      {isPending && (
         <Loader className="w-8 h-8 animate-spin place-self-center flex" />
-      ) : null}
+      )}
 
-      {members?.map((member) => {
+      {members.map((member) => {
         const name = member.userId?.name;
         const initials = getAvatarFallbackText(name);
         const avatarColor = getAvatarColor(name);
+
         return (
-          <div className="flex items-center justify-between space-x-4">
+          <div key={member.userId._id} className="flex items-center justify-between space-x-4">
             <div className="flex items-center space-x-4">
               <Avatar className="h-8 w-8">
-                <AvatarImage
-                  src={member.userId?.profilePicture || ""}
-                  alt="Image"
-                />
-                <AvatarFallback className={avatarColor}>
-                  {initials}
-                </AvatarFallback>
+                <AvatarImage src={member.userId?.profilePicture || ""} alt="Image" />
+                <AvatarFallback className={avatarColor}>{initials}</AvatarFallback>
               </Avatar>
               <div>
                 <p className="text-sm font-medium leading-none">{name}</p>
-                <p className="text-sm text-muted-foreground">
-                  {member.userId.email}
-                </p>
+                <p className="text-sm text-muted-foreground">{member.userId.email}</p>
               </div>
             </div>
+
             <div className="flex items-center gap-3">
               <Popover>
                 <PopoverTrigger asChild>
@@ -106,11 +101,7 @@ const AllMembers = () => {
                     variant="outline"
                     size="sm"
                     className="ml-auto min-w-24 capitalize disabled:opacity-95 disabled:pointer-events-none"
-                    disabled={
-                      isLoading ||
-                      !canChangeMemberRole ||
-                      member.userId._id === user?._id
-                    }
+                    disabled={isLoading || !canChangeMemberRole || member.userId._id === user?._id}
                   >
                     {member.role.name?.toLowerCase()}{" "}
                     {canChangeMemberRole && member.userId._id !== user?._id && (
@@ -118,6 +109,7 @@ const AllMembers = () => {
                     )}
                   </Button>
                 </PopoverTrigger>
+
                 {canChangeMemberRole && (
                   <PopoverContent className="p-0" align="end">
                     <Command>
@@ -133,29 +125,21 @@ const AllMembers = () => {
                           <>
                             <CommandEmpty>No roles found.</CommandEmpty>
                             <CommandGroup>
-                              {roles?.map(
+                              {roles.map(
                                 (role) =>
                                   role.name !== "OWNER" && (
                                     <CommandItem
                                       key={role._id}
                                       disabled={isLoading}
-                                      className="disabled:pointer-events-none gap-1 mb-1  flex flex-col items-start px-4 py-2 cursor-pointer"
-                                      onSelect={() => {
-                                        handleSelect(
-                                          role._id,
-                                          member.userId._id
-                                        );
-                                      }}
+                                      className="disabled:pointer-events-none gap-1 mb-1 flex flex-col items-start px-4 py-2 cursor-pointer"
+                                      onSelect={() => handleSelect(role._id, member.userId._id)}
                                     >
-                                      <p className="capitalize">
-                                        {role.name?.toLowerCase()}
-                                      </p>
+                                      <p className="capitalize">{role.name?.toLowerCase()}</p>
                                       <p className="text-sm text-muted-foreground">
                                         {role.name === "ADMIN" &&
-                                          `Can view, create, edit tasks, project and manage settings .`}
-
+                                          "Can view, create, edit tasks, project and manage settings."}
                                         {role.name === "MEMBER" &&
-                                          `Can view,edit only task created by.`}
+                                          "Can view, edit only tasks created by them."}
                                       </p>
                                     </CommandItem>
                                   )

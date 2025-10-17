@@ -1,0 +1,102 @@
+{
+  "sidebar": {
+    "download_report": "Télécharger le rapport",
+    "current_workspace": "Espace de travail actuel",
+    "all_workspaces": "Tous les espaces de travail",
+    "logout": "Se déconnecter",
+    "generating": "Génération..."
+  },
+  "nav": {
+    "dashboard": "Tableau de bord",
+    "tasks": "Tâches",
+    "members": "Membres",
+    "settings": "Paramètres"
+  },
+  "projects": {
+    "label": "Projets",
+    "success": "Projet supprimé avec succès",
+    "error": "Une erreur s'est produite",
+    "error_occurred": "Erreur lors de la récupération des projets",
+    "no_projects": "Il n'y a pas encore de projets dans cet espace de travail.",
+    "create_project": "Créer un projet",
+    "view": "Voir le projet",
+    "delete": "Supprimer le projet",
+    "delete_title": "Supprimer le projet",
+    "delete_description": "Êtes-vous sûr de vouloir supprimer {{name}} ? Cette action est irréversible.",
+    "cancel": "Annuler",
+    "more": "Plus",
+    "loading": "Chargement..."
+  },
+  "workspace": {
+  "label": "Espaces de travail",
+  "no_selected": "Aucun espace sélectionné",
+  "free": "Libre",
+  "add": "Ajouter un espace"
+},
+
+  "workspace_form": {
+    "title": "Configurez votre espace de travail d'équipe",
+    "description": "Organisez vos comités et équipes de réponse dans des espaces de travail dédiés",
+    "name_label": "Nom de l'espace de travail",
+    "name_placeholder": "Équipe de réponse d'urgence",
+    "name_description": "Ceci est le nom de votre comité ou équipe de réponse.",
+    "name_required": "Le nom de l'espace de travail est requis",
+    "description_label": "Description de l'espace de travail",
+    "description_placeholder": "Décrivez le rôle de votre comité ou équipe ici",
+    "description_description": "Décrivez votre espace de travail afin que votre comité ou équipe connaisse son objectif",
+    "optional": "Optionnel",
+    "create_button": "Créer l'espace de travail",
+    "error_title": "Erreur"
+  },
+  
+  "edit_workspace_form": {
+    "title": "Modifier l'espace de travail",
+    "name_label": "Nom de l'espace de travail",
+    "name_placeholder": "Équipe de réponse d'urgence",
+    "name_required": "Le nom de l'espace de travail est requis",
+    "description_label": "Description de l'espace de travail",
+    "description_placeholder": "Décrivez le rôle de votre comité dans la gestion des catastrophes.",
+    "description_optional": "Optionnel",
+    "update_button": "Mettre à jour l'espace de travail",
+    "error_title": "Erreur"
+  },
+  "analytics": {
+    "total_tasks": "Tâches totales",
+    "overdue_tasks": "Tâches en retard",
+    "completed_tasks": "Tâches terminées"
+  },
+  "breadcrumb": {
+    "dashboard": "Tableau de bord",
+    "project": "Projet",
+    "settings": "Paramètres",
+    "tasks": "Tâches",
+    "members": "Membres"
+  },
+  "delete_workspace_form": {
+    "title": "Supprimer l'espace de travail",
+    "description": "La suppression d'un espace de travail est permanente et irréversible. Toutes les données associées seront supprimées.",
+    "delete_button": "Supprimer l'espace de travail",
+    "confirm_title": "Supprimer l'espace de travail {{name}}",
+    "confirm_description": "Êtes-vous sûr de vouloir supprimer ? Cette action est irréversible.",
+    "confirm_button": "Supprimer",
+    "cancel_button": "Annuler",
+    "error_title": "Erreur"
+  },
+  "members": {
+    "title": "Members",
+    "loading": "Loading...",
+    "no_roles": "No roles found.",
+    "role_select_placeholder": "Select new role...",
+    "admin_description": "Can view, create, edit tasks, projects and manage settings.",
+    "member_description": "Can view and edit only tasks created by them.",
+    "success_change_role": "Member's role changed successfully",
+    "error_change_role": "Error occurred while changing member's role",
+    "button_change_role": "Change Role"
+  }
+}
+
+
+
+
+
+
