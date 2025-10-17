@@ -10,7 +10,8 @@
     "dashboard": "لوحة التحكم",
     "tasks": "المهام",
     "members": "الأعضاء",
-    "settings": "الإعدادات"
+    "settings": "الإعدادات",
+    "projects": "المشاريع"
   },
   "projects": {
     "label": "المشاريع",
@@ -21,8 +22,9 @@
     "create_project": "إنشاء مشروع",
     "view": "عرض المشروع",
     "delete": "حذف المشروع",
-    "delete_title": "حذف المشروع",
-    "delete_description": "هل أنت متأكد أنك تريد حذف {{name}}؟ هذا الإجراء لا يمكن التراجع عنه.",
+    "confirm_delete_title": "حذف المشروع",
+    "confirm_delete_description": "هل أنت متأكد أنك تريد حذف {{name}}؟ هذا الإجراء لا يمكن التراجع عنه.",
+    "confirm_delete_button": "حذف",
     "cancel": "إلغاء",
     "more": "المزيد",
     "loading": "جاري التحميل..."
@@ -82,14 +84,72 @@
   },
   "members": {
     "title": "الأعضاء",
-    "loading": "جارٍ التحميل...",
-    "no_roles": "لا توجد أدوار متاحة.",
+    "loading": "جارٍ تحميل الأعضاء...",
+    "no_roles": "لم يتم العثور على أي أدوار.",
     "role_select_placeholder": "اختر دورًا جديدًا...",
-    "admin_description": "يمكنه عرض، إنشاء، تعديل المهام والمشاريع وإدارة الإعدادات.",
-    "member_description": "يمكنه عرض وتعديل المهام التي قام بإنشائها فقط.",
+    "admin_description": "يمكنه عرض وإنشاء وتعديل المهام والمشاريع وإدارة الإعدادات.",
+    "member_description": "يمكنه فقط عرض وتعديل المهام التي أنشأها.",
     "success_change_role": "تم تغيير دور العضو بنجاح",
     "error_change_role": "حدث خطأ أثناء تغيير دور العضو",
     "button_change_role": "تغيير الدور"
+  },
+  "inviteMembersTitle": "دعوة الأعضاء للانضمام إليك",
+  "inviteMembersDescription": "يمكن لأي شخص لديه رابط الدعوة الانضمام إلى مساحة العمل هذه مجانًا. يمكنك أيضًا تعطيل الرابط وإنشاء رابط جديد في أي وقت.",
+  "copied": "تم النسخ",
+  "inviteUrlCopied": "تم نسخ رابط الدعوة إلى الحافظة",
+  "link": "الرابط",
+  "joined": "انضم في",
+  "unknownDate": "تاريخ غير معروف",
+  "noMembers": "لا يوجد أعضاء في مساحة العمل هذه.",
+  "avatarAlt": "صورة المستخدم",
+
+  "projects_form": {
+  "create_title": "إنشاء مشروع",
+  "create_description": "نظّم وأدر المهام والموارد وتعاون الفريق بسهولة",
+  "select_emoji": "اختر رمز تعبيري",
+  "name_label": "عنوان المشروع",
+  "name_placeholder": "طوارئ",
+  "name_required": "عنوان المشروع مطلوب",
+  "description_label": "وصف المشروع",
+  "description_placeholder": "أدخل وصف المشروع",
+  "optional": "اختياري",
+  "create_button": "إنشاء",
+  "success_title": "تم بنجاح",
+  "success_description": "تم إنشاء المشروع بنجاح",
+  "error_title": "خطأ"
+},
+ "project_form": {
+    "create_title": "إنشاء مشروع",
+    "create_description": "نظم المهام والموارد وتعاون الفريق بكفاءة",
+    "edit_title": "تعديل المشروع",
+    "edit_description": "قم بتحديث تفاصيل المشروع لتحسين إدارة المهام",
+    "select_emoji": "اختر رمز تعبيري",
+    "name_label": "عنوان المشروع",
+    "name_placeholder": "مشروع الطوارئ",
+    "name_required": "عنوان المشروع مطلوب",
+    "description_label": "وصف المشروع",
+    "description_placeholder": "أدخل وصف المشروع هنا",
+    "optional": "اختياري",
+    "create_button": "إنشاء",
+    "update_button": "تحديث",
+    "success_create": "تم إنشاء المشروع بنجاح",
+    "success_update": "تم تحديث المشروع بنجاح",
+    "error_create": "حدث خطأ أثناء إنشاء المشروع",
+    "error_update": "حدث خطأ أثناء تحديث المشروع"
+  },
+   "editProjectForm": {
+    "header": "تعديل المشروع",
+    "description": "قم بتحديث تفاصيل المشروع لتحسين إدارة المهام",
+    "select_emoji": "اختر رمز تعبيري",
+    "project_title": "عنوان المشروع",
+    "project_title_placeholder": "أدخل عنوان المشروع",
+    "project_description": "وصف المشروع",
+    "project_description_placeholder": "أدخل وصف المشروع",
+    "optional": "اختياري",
+    "update_button": "تحديث",
+    "success_title": "نجاح",
+    "error_title": "خطأ",
+    "project_title_required": "عنوان المشروع مطلوب"
   }
 
 }

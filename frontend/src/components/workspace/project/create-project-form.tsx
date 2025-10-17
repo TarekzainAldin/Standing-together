@@ -25,12 +25,14 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createProjectMutationFn } from "@/lib/api";
 import { toast } from "@/hooks/use-toast";
 import { Loader } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function CreateProjectForm({
   onClose,
 }: {
   onClose: () => void;
 }) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const workspaceId = useWorkspaceId();
@@ -43,7 +45,7 @@ export default function CreateProjectForm({
 
   const formSchema = z.object({
     name: z.string().trim().min(1, {
-      message: "Project title is required",
+      message: t("projects_form.name_required"),
     }),
     description: z.string().trim(),
   });
@@ -77,8 +79,8 @@ export default function CreateProjectForm({
         });
 
         toast({
-          title: "Success",
-          description: "Project created successfully",
+          title: t("projects_form.success_title"),
+          description: t("projects_form.success_description"),
           variant: "success",
         });
 
@@ -87,7 +89,7 @@ export default function CreateProjectForm({
       },
       onError: (error) => {
         toast({
-          title: "Error",
+          title: t("projects_form.error_title"),
           description: error.message,
           variant: "destructive",
         });
@@ -103,17 +105,17 @@ export default function CreateProjectForm({
             className="text-xl tracking-[-0.16px] dark:text-[#fcfdffef] font-semibold mb-1
            text-center sm:text-left"
           >
-            Create Project
+            {t("projects_form.create_title")}
           </h1>
           <p className="text-muted-foreground text-sm leading-tight">
-            Organize and manage tasks, resources, and team collaboration
+            {t("projects_form.create_description")}
           </p>
         </div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700">
-                Select Emoji
+                {t("projects_form.select_emoji")}
               </label>
               <Popover>
                 <PopoverTrigger asChild>
@@ -124,7 +126,7 @@ export default function CreateProjectForm({
                     <span className="text-4xl">{emoji}</span>
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent align="start" className=" !p-0">
+                <PopoverContent align="start" className="!p-0">
                   <EmojiPickerComponent onSelectEmoji={handleEmojiSelection} />
                 </PopoverContent>
               </Popover>
@@ -136,11 +138,11 @@ export default function CreateProjectForm({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="dark:text-[#f1f7feb5] text-sm">
-                      Project title
+                      {t("projects_form.name_label")}
                     </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Emergency"
+                        placeholder={t("projects_form.name_placeholder")}
                         className="!h-[48px]"
                         {...field}
                       />
@@ -157,15 +159,17 @@ export default function CreateProjectForm({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="dark:text-[#f1f7feb5] text-sm">
-                      Project description
+                      {t("projects_form.description_label")}{" "}
                       <span className="text-xs font-extralight ml-2">
-                        Optional
+                        {t("projects_form.optional")}
                       </span>
                     </FormLabel>
                     <FormControl>
                       <Textarea
                         rows={4}
-                        placeholder="Projects description"
+                        placeholder={t(
+                          "projects_form.description_placeholder"
+                        )}
                         {...field}
                       />
                     </FormControl>
@@ -177,11 +181,11 @@ export default function CreateProjectForm({
 
             <Button
               disabled={isPending}
-              className="flex place-self-end  h-[40px] text-white font-semibold"
+              className="flex place-self-end h-[40px] text-white font-semibold"
               type="submit"
             >
               {isPending && <Loader className="animate-spin" />}
-              Create
+              {t("projects_form.create_button")}
             </Button>
           </form>
         </Form>

@@ -10,7 +10,8 @@
     "dashboard": "Tableau de bord",
     "tasks": "Tâches",
     "members": "Membres",
-    "settings": "Paramètres"
+    "settings": "Paramètres",
+    "projects": "Projets"
   },
   "projects": {
     "label": "Projets",
@@ -21,19 +22,19 @@
     "create_project": "Créer un projet",
     "view": "Voir le projet",
     "delete": "Supprimer le projet",
-    "delete_title": "Supprimer le projet",
-    "delete_description": "Êtes-vous sûr de vouloir supprimer {{name}} ? Cette action est irréversible.",
+    "confirm_delete_title": "Supprimer le projet",
+    "confirm_delete_description": "Êtes-vous sûr de vouloir supprimer {{name}} ? Cette action est irréversible.",
+    "confirm_delete_button": "Supprimer",
     "cancel": "Annuler",
     "more": "Plus",
     "loading": "Chargement..."
   },
   "workspace": {
-  "label": "Espaces de travail",
-  "no_selected": "Aucun espace sélectionné",
-  "free": "Libre",
-  "add": "Ajouter un espace"
-},
-
+    "label": "Espaces de travail",
+    "no_selected": "Aucun espace sélectionné",
+    "free": "Libre",
+    "add": "Ajouter un espace"
+  },
   "workspace_form": {
     "title": "Configurez votre espace de travail d'équipe",
     "description": "Organisez vos comités et équipes de réponse dans des espaces de travail dédiés",
@@ -43,12 +44,11 @@
     "name_required": "Le nom de l'espace de travail est requis",
     "description_label": "Description de l'espace de travail",
     "description_placeholder": "Décrivez le rôle de votre comité ou équipe ici",
-    "description_description": "Décrivez votre espace de travail afin que votre comité ou équipe connaisse son objectif",
+    "description_description": "Décrivez votre espace de travail afin que votre équipe connaisse son objectif",
     "optional": "Optionnel",
     "create_button": "Créer l'espace de travail",
     "error_title": "Erreur"
   },
-  
   "edit_workspace_form": {
     "title": "Modifier l'espace de travail",
     "name_label": "Nom de l'espace de travail",
@@ -83,20 +83,73 @@
     "error_title": "Erreur"
   },
   "members": {
-    "title": "Members",
-    "loading": "Loading...",
-    "no_roles": "No roles found.",
-    "role_select_placeholder": "Select new role...",
-    "admin_description": "Can view, create, edit tasks, projects and manage settings.",
-    "member_description": "Can view and edit only tasks created by them.",
-    "success_change_role": "Member's role changed successfully",
-    "error_change_role": "Error occurred while changing member's role",
-    "button_change_role": "Change Role"
+    "title": "Membres",
+    "loading": "Chargement des membres...",
+    "no_roles": "Aucun rôle trouvé.",
+    "role_select_placeholder": "Sélectionner un nouveau rôle...",
+    "admin_description": "Peut voir, créer, modifier des tâches, projets et gérer les paramètres.",
+    "member_description": "Peut uniquement voir et modifier les tâches qu'il a créées.",
+    "success_change_role": "Le rôle du membre a été modifié avec succès",
+    "error_change_role": "Une erreur s'est produite lors du changement du rôle du membre",
+    "button_change_role": "Changer le rôle"
+  },
+  "inviteMembersTitle": "Invitez des membres à vous rejoindre",
+  "inviteMembersDescription": "Toute personne disposant d’un lien d’invitation peut rejoindre cet espace de travail gratuit. Vous pouvez également désactiver et créer un nouveau lien d’invitation à tout moment.",
+  "copied": "Copié",
+  "inviteUrlCopied": "Le lien d’invitation a été copié dans le presse-papiers",
+  "link": "Lien",
+  "joined": "A rejoint",
+  "unknownDate": "Date inconnue",
+  "noMembers": "Aucun membre trouvé dans cet espace de travail.",
+  "avatarAlt": "Avatar de l'utilisateur",
+
+  "projects_form": {
+  "create_title": "Créer un projet",
+  "create_description": "Organisez et gérez les tâches, les ressources et la collaboration de l'équipe",
+  "select_emoji": "Sélectionner un emoji",
+  "name_label": "Titre du projet",
+  "name_placeholder": "Urgence",
+  "name_required": "Le titre du projet est requis",
+  "description_label": "Description du projet",
+  "description_placeholder": "Description du projet",
+  "optional": "Optionnel",
+  "create_button": "Créer",
+  "success_title": "Succès",
+  "success_description": "Projet créé avec succès",
+  "error_title": "Erreur"
+},
+ "project_form": {
+    "create_title": "Créer un projet",
+    "create_description": "Organisez et gérez les tâches, les ressources et la collaboration de l'équipe",
+    "edit_title": "Modifier le projet",
+    "edit_description": "Mettez à jour les détails du projet pour améliorer la gestion des tâches",
+    "select_emoji": "Sélectionner un emoji",
+    "name_label": "Titre du projet",
+    "name_placeholder": "Urgence",
+    "name_required": "Le titre du projet est requis",
+    "description_label": "Description du projet",
+    "description_placeholder": "Description du projet",
+    "optional": "Optionnel",
+    "create_button": "Créer",
+    "update_button": "Mettre à jour",
+    "success_create": "Projet créé avec succès",
+    "success_update": "Projet mis à jour avec succès",
+    "error_create": "Erreur lors de la création du projet",
+    "error_update": "Erreur lors de la mise à jour du projet"
+  },
+  "editProjectForm": {
+    "header": "Modifier le projet",
+    "description": "Mettez à jour les détails du projet pour améliorer la gestion des tâches",
+    "select_emoji": "Choisir un emoji",
+    "project_title": "Titre du projet",
+    "project_title_placeholder": "Entrez le titre du projet",
+    "project_description": "Description du projet",
+    "project_description_placeholder": "Entrez la description du projet",
+    "optional": "Optionnel",
+    "update_button": "Mettre à jour",
+    "success_title": "Succès",
+    "error_title": "Erreur",
+    "project_title_required": "Le titre du projet est requis"
   }
+
 }
-
-
-
-
-
-

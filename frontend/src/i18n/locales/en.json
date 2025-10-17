@@ -14,24 +14,28 @@
     "projects": "Projects"
   },
   "projects": {
+    "label": "Projects",
+    "success": "Project deleted successfully",
+    "error": "An error occurred",
+    "error_occurred": "Error occurred while fetching projects",
     "no_projects": "There are no projects in this workspace yet.",
     "create_project": "Create a project",
-    "view_project": "View Project",
-    "delete_project": "Delete Project",
-    "loading": "Loading...",
-    "more": "More",
+    "view": "View Project",
+    "delete": "Delete Project",
     "confirm_delete_title": "Delete Project",
     "confirm_delete_description": "Are you sure you want to delete {{name}}? This action cannot be undone.",
     "confirm_delete_button": "Delete",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "more": "More",
+    "loading": "Loading..."
   },
   "workspace": {
-  "label": "Workspaces",
-  "no_selected": "No Workspace selected",
-  "free": "Free",
-  "add": "Add workspace"
-},
-"workspace_form": {
+    "label": "Workspaces",
+    "no_selected": "No Workspace selected",
+    "free": "Free",
+    "add": "Add workspace"
+  },
+  "workspace_form": {
     "title": "Set up your team workspace",
     "description": "Organize your committees and response teams in dedicated workspaces",
     "name_label": "Workspace name",
@@ -43,6 +47,17 @@
     "description_description": "Describe your workspace so your committee or team knows its purpose",
     "optional": "Optional",
     "create_button": "Create Workspace",
+    "error_title": "Error"
+  },
+  "edit_workspace_form": {
+    "title": "Edit Workspace",
+    "name_label": "Workspace name",
+    "name_placeholder": "Emergency Response Team",
+    "name_required": "Workspace name is required",
+    "description_label": "Workspace description",
+    "description_placeholder": "Describe your committee’s role here",
+    "description_optional": "Optional",
+    "update_button": "Update Workspace",
     "error_title": "Error"
   },
   "analytics": {
@@ -57,7 +72,7 @@
     "tasks": "Tasks",
     "members": "Members"
   },
-   "delete_workspace_form": {
+  "delete_workspace_form": {
     "title": "Delete Workspace",
     "description": "Deleting a workspace is permanent and cannot be undone. All associated data will be removed.",
     "delete_button": "Delete Workspace",
@@ -77,6 +92,64 @@
     "success_change_role": "Member's role changed successfully",
     "error_change_role": "Error occurred while changing member's role",
     "button_change_role": "Change Role"
-  }
+  },
+  "inviteMembersTitle": "Invite members to join you",
+  "inviteMembersDescription": "Anyone with an invite link can join this free workspace. You can also disable and create a new invite link for this workspace at any time.",
+  "copied": "Copied",
+  "inviteUrlCopied": "Invite URL copied to clipboard",
+  "link": "Link",
+  "joined": "Joined",
+  "unknownDate": "Unknown date",
+  "noMembers": "No members found in this workspace.",
+  "avatarAlt": "User avatar",
 
+
+  "projects_form": {
+  "create_title": "Create Project",
+  "create_description": "Organize and manage tasks, resources, and team collaboration",
+  "select_emoji": "Select Emoji",
+  "name_label": "Project title",
+  "name_placeholder": "Emergency",
+  "name_required": "Project title is required",
+  "description_label": "Project description",
+  "description_placeholder": "Project description",
+  "optional": "Optional",
+  "create_button": "Create",
+  "success_title": "Success",
+  "success_description": "Project created successfully",
+  "error_title": "Error"
+},
+"project_form": {
+    "create_title": "Create Project",
+    "create_description": "Organize and manage tasks, resources, and team collaboration",
+    "edit_title": "Edit Project",
+    "edit_description": "Update the project details to refine task management",
+    "select_emoji": "Select Emoji",
+    "name_label": "Project title",
+    "name_placeholder": "Emergency",
+    "name_required": "Project title is required",
+    "description_label": "Project description",
+    "description_placeholder": "Project description",
+    "optional": "Optional",
+    "create_button": "Create",
+    "update_button": "Update",
+    "success_create": "Project created successfully",
+    "success_update": "Project updated successfully",
+    "error_create": "Error while creating project",
+    "error_update": "Error while updating project"
+  },
+  "editProjectForm": {
+    "header": "Edit Project",
+    "description": "Update the project details to refine task management",
+    "select_emoji": "Select Emoji",
+    "project_title": "Project title",
+    "project_title_placeholder": "Enter project title",
+    "project_description": "Project description",
+    "project_description_placeholder": "Enter project description",
+    "optional": "Optional",
+    "update_button": "Update",
+    "success_title": "Success",
+    "error_title": "Error",
+    "project_title_required": "Project title is required"
+  }
 }

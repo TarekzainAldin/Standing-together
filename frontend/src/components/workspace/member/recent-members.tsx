@@ -4,8 +4,10 @@ import useWorkspaceId from "@/hooks/use-workspace-id";
 import { getAvatarColor, getAvatarFallbackText } from "@/lib/helper";
 import { format } from "date-fns";
 import { Loader } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const RecentMembers = () => {
+  const { t } = useTranslation();
   const workspaceId = useWorkspaceId();
   const { data, isPending } = useGetWorkspaceMembers(workspaceId);
 
@@ -13,12 +15,14 @@ const RecentMembers = () => {
 
   return (
     <div className="flex flex-col pt-2">
-      {isPending ? (
-        <Loader
-          className="w-8 h-8 
-        animate-spin
-        place-self-center flex"
-        />
+      {isPending && (
+        <Loader className="w-8 h-8 animate-spin place-self-center flex" />
+      )}
+
+      {members.length === 0 && !isPending ? (
+        <p className="text-sm text-muted-foreground text-center py-2">
+          {t("noMembers")}
+        </p>
       ) : null}
 
       <ul role="list" className="space-y-3">
@@ -37,7 +41,7 @@ const RecentMembers = () => {
                 <Avatar className="h-9 w-9 sm:flex">
                   <AvatarImage
                     src={member.userId.profilePicture || ""}
-                    alt="Avatar"
+                    alt={t("avatarAlt")}
                   />
                   <AvatarFallback className={avatarColor}>
                     {initials}
@@ -55,8 +59,12 @@ const RecentMembers = () => {
 
               {/* Joined Date */}
               <div className="ml-auto text-sm text-gray-500">
-                <p>Joined</p>
-                <p>{member.joinedAt ? format(member.joinedAt, "PPP") : null}</p>
+                <p>{t("joined")}</p>
+                <p>
+                  {member.joinedAt
+                    ? format(member.joinedAt, "PPP")
+                    : t("unknownDate")}
+                </p>
               </div>
             </li>
           );
