@@ -18,12 +18,15 @@ import useWorkspaceId from "@/hooks/use-workspace-id";
 import { deleteTaskMutationFn } from "@/lib/api";
 import { toast } from "@/hooks/use-toast";
 import EditTaskDialog from "../edit-task-dialog"; // Import the Edit Dialog
+import { useTranslation } from "react-i18next"; // ✅ Import translation hook
 
 interface DataTableRowActionsProps {
   row: Row<TaskType>;
 }
 
 export function DataTableRowActions({ row }: DataTableRowActionsProps) {
+  const { t } = useTranslation(); // ✅ Initialize translation
+
   const [openDeleteDialog, setOpenDialog] = useState(false);
   const [openEditDialog, setOpenEditDialog] = useState(false); // State for edit dialog
 
@@ -44,11 +47,19 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
       {
         onSuccess: (data) => {
           queryClient.invalidateQueries({ queryKey: ["all-tasks", workspaceId] });
-          toast({ title: "Success", description: data.message, variant: "success" });
+          toast({ 
+            title: t("taskForm.successUpdate"), 
+            description: data.message, 
+            variant: "success" 
+          });
           setTimeout(() => setOpenDialog(false), 100);
         },
         onError: (error) => {
-          toast({ title: "Error", description: error.message, variant: "destructive" });
+          toast({ 
+            title: t("taskForm.errorUpdate"), 
+            description: error.message, 
+            variant: "destructive" 
+          });
         },
       }
     );
@@ -60,13 +71,13 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="flex h-8 w-8 p-0 data-[state=open]:bg-muted">
             <MoreHorizontal />
-            <span className="sr-only">Open menu</span>
+            <span className="sr-only">{t("dataTable.columns")}</span>
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-[160px]">
           {/* Edit Task Option */}
           <DropdownMenuItem className="cursor-pointer" onClick={() => setOpenEditDialog(true)}>
-            <Pencil className="w-4 h-4 mr-2" /> Edit Task
+            <Pencil className="w-4 h-4 mr-2" /> {t("taskForm.editTask")}
           </DropdownMenuItem>
           <DropdownMenuSeparator />
 
@@ -75,7 +86,7 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
             className="!text-destructive cursor-pointer"
             onClick={() => setOpenDialog(true)}
           >
-            Delete Task
+            {t("taskForm.deleteTask")}
             <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuContent>
@@ -90,10 +101,10 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
         isLoading={isPending}
         onClose={() => setOpenDialog(false)}
         onConfirm={handleConfirm}
-        title="Delete Task"
-        description={`Are you sure you want to delete ${taskCode}?`}
-        confirmText="Delete"
-        cancelText="Cancel"
+        title={t("taskForm.deleteTask")}
+        description={t("taskForm.deleteTaskConfirm", { taskCode })}
+        confirmText={t("taskForm.delete")}
+        cancelText={t("taskForm.cancel")}
       />
     </>
   );

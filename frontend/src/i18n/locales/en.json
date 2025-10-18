@@ -34,6 +34,8 @@
     "no_selected": "No Workspace selected",
     "free": "Free",
     "add": "Add workspace"
+    
+
   },
   "workspace_form": {
     "title": "Set up your team workspace",
@@ -102,24 +104,22 @@
   "unknownDate": "Unknown date",
   "noMembers": "No members found in this workspace.",
   "avatarAlt": "User avatar",
-
-
   "projects_form": {
-  "create_title": "Create Project",
-  "create_description": "Organize and manage tasks, resources, and team collaboration",
-  "select_emoji": "Select Emoji",
-  "name_label": "Project title",
-  "name_placeholder": "Emergency",
-  "name_required": "Project title is required",
-  "description_label": "Project description",
-  "description_placeholder": "Project description",
-  "optional": "Optional",
-  "create_button": "Create",
-  "success_title": "Success",
-  "success_description": "Project created successfully",
-  "error_title": "Error"
-},
-"project_form": {
+    "create_title": "Create Project",
+    "create_description": "Organize and manage tasks, resources, and team collaboration",
+    "select_emoji": "Select Emoji",
+    "name_label": "Project title",
+    "name_placeholder": "Emergency",
+    "name_required": "Project title is required",
+    "description_label": "Project description",
+    "description_placeholder": "Project description",
+    "optional": "Optional",
+    "create_button": "Create",
+    "success_title": "Success",
+    "success_description": "Project created successfully",
+    "error_title": "Error"
+  },
+  "project_form": {
     "create_title": "Create Project",
     "create_description": "Organize and manage tasks, resources, and team collaboration",
     "edit_title": "Edit Project",
@@ -152,10 +152,131 @@
     "error_title": "Error",
     "project_title_required": "Project title is required"
   },
- "projectAnalytics": {
-  "totalTasks": "Total Project Tasks",
-  "overdueTasks": "Overdue Project Tasks",
-  "completedTasks": "Completed Project Tasks"
+  "projectAnalytics": {
+    "totalTasks": "Total Project Tasks",
+    "overdueTasks": "Overdue Project Tasks",
+    "completedTasks": "Completed Project Tasks"
+  },
+  "recentProjects": {
+    "noProjects": "No project created yet",
+    "createdBy": "Created by"
+  },
+  "createTask": {
+    "title": "Create Task",
+    "subtitle": "Organize tasks, assign team members, and manage disaster response projects.",
+    "taskTitle": "Task title",
+    "taskDescription": "Task description",
+    "optional": "Optional",
+    "project": "Project",
+    "selectProject": "Select a project",
+    "assignedTo": "Assigned To",
+    "selectMember": "Select a team member",
+    "dueDate": "Due Date",
+    "pickDate": "Pick a date",
+    "status": "Status",
+    "selectStatus": "Select a status",
+    "priority": "Priority",
+    "selectPriority": "Select a priority",
+    "createButton": "Create Task",
+    "placeholder": {
+      "taskTitle": "Flood Response Setup",
+      "taskDescription": "Describe objectives and steps for this task"
+    },
+    "errors": {
+      "titleRequired": "Title is required",
+      "projectRequired": "Project is required",
+      "statusRequired": "Status is required",
+      "priorityRequired": "Priority is required",
+      "assignedToRequired": "AssignedTo is required",
+      "dueDateRequired": "Due date is required"
+    },
+    "toast": {
+      "success": "Task created successfully",
+      "error": "An error occurred"
+    }
+  },
+  "editTask": {
+    "title": "Edit Task",
+    "taskTitle": "Task Title",
+    "taskDescription": "Task Description",
+    "assignedTo": "Assigned To",
+    "selectMember": "Select an assignee",
+    "dueDate": "Due Date",
+    "pickDate": "Pick a date",
+    "status": "Status",
+    "selectStatus": "Select status",
+    "priority": "Priority",
+    "selectPriority": "Select priority",
+    "saveButton": "Save Changes",
+    "unknown": "Unknown",
+    "placeholder": {
+      "taskTitle": "Task title",
+      "taskDescription": "Description"
+    },
+    "errors": {
+      "titleRequired": "Title is required",
+      "assignedToRequired": "AssignedTo is required",
+      "dueDateRequired": "A due date is required."
+    },
+    "toast": {
+      "success": "Task updated successfully",
+      "error": "An error occurred"
+    }
+  },
+  "recentTasks": {
+    "noTask": "No Task created yet",
+    "due": "Due"
+  },
+  "taskTable": {
+    "filterTasks": "Filter tasks...",
+    "status": "Status",
+    "priority": "Priority",
+    "assignedTo": "Assigned To",
+    "projects": "Projects",
+    "reset": "Reset",
+    "unknown": "Unknown"
+  },
+  "dataTable": {
+    "sortAsc": "Asc",
+    "sortDesc": "Desc",
+    "hide": "Hide",
+    "filterPlaceholder": "Filtrer {{title}}...",
+    "noResults": "Aucun résultat trouvé.",
+    "clearFilters": "Effacer les filtres",
+    "showingRows": "Showing {{from}}-{{to}} of {{total}} rows",
+    "rowsPerPage": "Rows per page",
+    "pageInfo": "Page {{current}} of {{total}}",
+    "previous": "Previous",
+    "next": "Next",
+    "firstPage": "Go to first page",
+    "previousPage": "Go to previous page",
+    "nextPage": "Go to next page",
+    "lastPage": "Go to last page",
+    "columns": "Columns",
+    "columnNames": {
+      "title": "Title",
+      "status": "Status",
+      "priority": "Priority",
+      "assignedTo": "Assigned To",
+      "dueDate": "Due Date"
+    }
+  
+  },
+  "taskForm": {
+    "editTask": "Edit Task",
+    "deleteTask": "Delete Task",
+    "deleteTaskConfirm": "Are you sure you want to delete {{taskCode}}?",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "successUpdate": "Task updated successfully",
+    "errorUpdate": "Error updating task"
+  },
+  "dashboard": {
+  "workspaceOverview": "Workspace Overview",
+  "workspaceOverviewDescription": "Here’s an overview for this workspace!",
+  "newProject": "New Project",
+  "recentProjects": "Recent Projects",
+  "recentTasks": "Recent Tasks",
+  "recentMembers": "Recent Members"
 }
-
 }
