@@ -41,8 +41,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { createTaskMutationFn } from "@/lib/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "@/hooks/use-toast";
+import { useTranslation } from "react-i18next";
 
 export default function CreateTaskForm(props: { projectId?: string; onClose: () => void }) {
+  const { t } = useTranslation();
   const { projectId, onClose } = props;
 
   const queryClient = useQueryClient();
@@ -84,13 +86,13 @@ export default function CreateTaskForm(props: { projectId?: string; onClose: () 
   });
 
   const formSchema = z.object({
-    title: z.string().trim().min(1, { message: "Title is required" }),
+    title: z.string().trim().min(1, { message: t("createTask.errors.titleRequired") }),
     description: z.string().trim(),
-    projectId: z.string().trim().min(1, { message: "Project is required" }),
-    status: z.enum(Object.values(TaskStatusEnum) as [keyof typeof TaskStatusEnum], { required_error: "Status is required" }),
-    priority: z.enum(Object.values(TaskPriorityEnum) as [keyof typeof TaskPriorityEnum], { required_error: "Priority is required" }),
-    assignedTo: z.string().trim().min(1, { message: "AssignedTo is required" }),
-    dueDate: z.date({ required_error: "Due date is required." }),
+    projectId: z.string().trim().min(1, { message: t("createTask.errors.projectRequired") }),
+    status: z.enum(Object.values(TaskStatusEnum) as [keyof typeof TaskStatusEnum], { required_error: t("createTask.errors.statusRequired") }),
+    priority: z.enum(Object.values(TaskPriorityEnum) as [keyof typeof TaskPriorityEnum], { required_error: t("createTask.errors.priorityRequired") }),
+    assignedTo: z.string().trim().min(1, { message: t("createTask.errors.assignedToRequired") }),
+    dueDate: z.date({ required_error: t("createTask.errors.dueDateRequired") }),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -116,12 +118,16 @@ export default function CreateTaskForm(props: { projectId?: string; onClose: () 
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ["project-analytics", projectId] });
         queryClient.invalidateQueries({ queryKey: ["all-tasks", workspaceId] });
-        toast({ title: "Success", description: "Task created successfully", variant: "success" });
+        toast({ title: t("createTask.toast.success"), variant: "success" });
         onClose();
       },
-      onError: (error) => {
-        toast({ title: "Error", description: error.message, variant: "destructive" });
-      },
+      onError: (error: unknown) => {
+  if (error instanceof Error) {
+    toast({ title: t("createTask.toast.error"), description: error.message, variant: "destructive" });
+  } else {
+    toast({ title: t("createTask.toast.error"), description: String(error), variant: "destructive" });
+  }
+},
     });
   };
 
@@ -129,20 +135,23 @@ export default function CreateTaskForm(props: { projectId?: string; onClose: () 
     <div className="w-full max-w-full bg-white dark:bg-gray-900 rounded-lg p-6 shadow-md">
       <div className="mb-6 border-b pb-3">
         <h1 className="text-2xl font-semibold mb-1 text-center sm:text-left dark:text-white">
-          Create Task
+          {t("createTask.title")}
         </h1>
         <p className="text-sm text-muted-foreground">
-          Organize tasks, assign team members, and manage disaster response projects.
+          {t("createTask.subtitle")}
         </p>
       </div>
+
       <Form {...form}>
         <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
           {/* Task Title */}
           <FormField control={form.control} name="title" render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-sm font-semibold dark:text-[#f1f7feb5]">Task title</FormLabel>
+              <FormLabel className="text-sm font-semibold dark:text-[#f1f7feb5]">
+                {t("createTask.taskTitle")}
+              </FormLabel>
               <FormControl>
-                <Input placeholder="Flood Response Setup" className="!h-[48px] rounded-md" {...field} />
+                <Input placeholder={t("createTask.placeholder.taskTitle")} className="!h-[48px] rounded-md" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -151,9 +160,11 @@ export default function CreateTaskForm(props: { projectId?: string; onClose: () 
           {/* Task Description */}
           <FormField control={form.control} name="description" render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-sm font-semibold dark:text-[#f1f7feb5]">Task description <span className="text-xs font-light ml-2">Optional</span></FormLabel>
+              <FormLabel className="text-sm font-semibold dark:text-[#f1f7feb5]">
+                {t("createTask.taskDescription")} <span className="text-xs font-light ml-2">{t("createTask.optional")}</span>
+              </FormLabel>
               <FormControl>
-                <Textarea rows={2} placeholder="Describe objectives and steps for this task" className="rounded-md" {...field} />
+                <Textarea rows={2} placeholder={t("createTask.placeholder.taskDescription")} className="rounded-md" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -162,11 +173,11 @@ export default function CreateTaskForm(props: { projectId?: string; onClose: () 
           {/* Project Selection */}
           {!projectId && <FormField control={form.control} name="projectId" render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-sm font-semibold">Project</FormLabel>
+              <FormLabel className="text-sm font-semibold">{t("createTask.project")}</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select a project" />
+                    <SelectValue placeholder={t("createTask.selectProject")} />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent className="max-h-52 overflow-y-auto scrollbar">
@@ -181,11 +192,11 @@ export default function CreateTaskForm(props: { projectId?: string; onClose: () 
           {/* Assigned To */}
           <FormField control={form.control} name="assignedTo" render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-sm font-semibold">Assigned To</FormLabel>
+              <FormLabel className="text-sm font-semibold">{t("createTask.assignedTo")}</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select a team member" />
+                    <SelectValue placeholder={t("createTask.selectMember")} />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent className="max-h-52 overflow-y-auto scrollbar">
@@ -199,18 +210,26 @@ export default function CreateTaskForm(props: { projectId?: string; onClose: () 
           {/* Due Date */}
           <FormField control={form.control} name="dueDate" render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-sm font-semibold">Due Date</FormLabel>
+              <FormLabel className="text-sm font-semibold">{t("createTask.dueDate")}</FormLabel>
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
                     <Button variant="outline" className={cn("w-full text-left flex-1", !field.value && "text-muted-foreground")}>
-                      {field.value ? format(field.value, "PPP") : <span>Pick a date</span>}
+                      {field.value ? format(field.value, "PPP") : <span>{t("createTask.pickDate")}</span>}
                       <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                     </Button>
                   </FormControl>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar mode="single" selected={field.value} onSelect={field.onChange} disabled={date => date < new Date(new Date().setHours(0,0,0,0)) || date > new Date("2100-12-31")} initialFocus defaultMonth={new Date()} fromMonth={new Date()} />
+                  <Calendar
+                    mode="single"
+                    selected={field.value}
+                    onSelect={field.onChange}
+                    disabled={date => date < new Date(new Date().setHours(0,0,0,0)) || date > new Date("2100-12-31")}
+                    initialFocus
+                    defaultMonth={new Date()}
+                    fromMonth={new Date()}
+                  />
                 </PopoverContent>
               </Popover>
               <FormMessage />
@@ -221,10 +240,10 @@ export default function CreateTaskForm(props: { projectId?: string; onClose: () 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <FormField control={form.control} name="status" render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-sm font-semibold">Status</FormLabel>
+                <FormLabel className="text-sm font-semibold">{t("createTask.status")}</FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
-                    <SelectTrigger><SelectValue placeholder="Select a status" /></SelectTrigger>
+                    <SelectTrigger><SelectValue placeholder={t("createTask.selectStatus")} /></SelectTrigger>
                   </FormControl>
                   <SelectContent>{statusOptions.map(option => <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>)}</SelectContent>
                 </Select>
@@ -234,10 +253,10 @@ export default function CreateTaskForm(props: { projectId?: string; onClose: () 
 
             <FormField control={form.control} name="priority" render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-sm font-semibold">Priority</FormLabel>
+                <FormLabel className="text-sm font-semibold">{t("createTask.priority")}</FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
-                    <SelectTrigger><SelectValue placeholder="Select a priority" /></SelectTrigger>
+                    <SelectTrigger><SelectValue placeholder={t("createTask.selectPriority")} /></SelectTrigger>
                   </FormControl>
                   <SelectContent>{priorityOptions.map(option => <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>)}</SelectContent>
                 </Select>
@@ -249,7 +268,7 @@ export default function CreateTaskForm(props: { projectId?: string; onClose: () 
           {/* Submit Button */}
           <Button className="w-full h-[45px] bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white font-semibold rounded-lg shadow-lg flex items-center justify-center gap-2 transition-all duration-200" type="submit" disabled={isPending}>
             {isPending && <Loader className="animate-spin" />}
-            Create Task
+            {t("createTask.createButton")}
           </Button>
         </form>
       </Form>

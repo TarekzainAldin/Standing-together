@@ -29,6 +29,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
 import TableSkeleton from "@/components/skeleton-loaders/table-skeleton";
 import { DataTablePagination } from "./table-pagination";
+import { useTranslation } from "react-i18next"; // ✅ i18n
 
 interface PaginationProps {
   totalCount: number;
@@ -55,14 +56,12 @@ export function DataTable<TData, TValue>({
   onPageChange,
   onPageSizeChange,
 }: DataTableProps<TData, TValue>) {
+  const { t } = useTranslation(); // ✅ initialize translation
   const { totalCount = 0, pageNumber = 1, pageSize = 10 } = pagination || {};
 
   const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  );
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({});
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
+  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
 
   const table = useReactTable({
@@ -89,57 +88,53 @@ export function DataTable<TData, TValue>({
   return (
     <div className="w-full space-y-2">
       <div className="block w-full lg:flex lg:items-center lg:justify-between">
-        {filtersToolbar && <div className="flex-1"> {filtersToolbar}</div>}
+        {filtersToolbar && <div className="flex-1">{filtersToolbar}</div>}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto w-full lg:w-auto">
-              Columns <ChevronDown />
+              {t("dataTable.columns")} <ChevronDown />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             {table
               .getAllColumns()
               .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                );
-              })}
+              .map((column) => (
+                <DropdownMenuCheckboxItem
+                  key={column.id}
+                  className="capitalize"
+                  checked={column.getIsVisible()}
+                  onCheckedChange={(value) => column.toggleVisibility(!!value)}
+                >
+                  {t(`dataTable.columnNames.${column.id}`, column.id)}
+                </DropdownMenuCheckboxItem>
+              ))}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
+
       <div className="rounded-md border">
         {isLoading ? (
-          <TableSkeleton columns={6} rows={10} />
+          <TableSkeleton columns={columns.length} rows={10} />
         ) : (
           <Table>
             <TableHeader>
               {table.getHeaderGroups().map((headerGroup) => (
                 <TableRow key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => {
-                    return (
-                      <TableHead key={header.id}>
-                        {header.isPlaceholder
-                          ? null
-                          : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext()
-                            )}
-                      </TableHead>
-                    );
-                  })}
+                  {headerGroup.headers.map((header) => (
+                    <TableHead key={header.id}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                    </TableHead>
+                  ))}
                 </TableRow>
               ))}
             </TableHeader>
+
             <TableBody>
               {table.getRowModel().rows?.length ? (
                 table.getRowModel().rows.map((row) => (
@@ -149,21 +144,15 @@ export function DataTable<TData, TValue>({
                   >
                     {row.getVisibleCells().map((cell) => (
                       <TableCell key={cell.id}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
                       </TableCell>
                     ))}
                   </TableRow>
                 ))
               ) : (
                 <TableRow>
-                  <TableCell
-                    colSpan={columns.length}
-                    className="h-24 text-center"
-                  >
-                    No results.
+                  <TableCell colSpan={columns.length} className="h-24 text-center">
+                    {t("dataTable.noResults")}
                   </TableCell>
                 </TableRow>
               )}
@@ -171,6 +160,7 @@ export function DataTable<TData, TValue>({
           </Table>
         )}
       </div>
+
       <DataTablePagination
         table={table}
         pageNumber={pageNumber}

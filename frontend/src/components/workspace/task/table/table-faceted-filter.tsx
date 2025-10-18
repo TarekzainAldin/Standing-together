@@ -20,6 +20,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
+import { useTranslation } from "react-i18next"; // ✅ import i18n hook
 
 interface DataTableFacetedFilterProps {
   title?: string;
@@ -30,8 +31,8 @@ interface DataTableFacetedFilterProps {
   }[];
   disabled?: boolean;
   multiSelect?: boolean;
-  selectedValues: string[]; // New prop
-  onFilterChange: (values: string[]) => void; // New callback prop
+  selectedValues: string[];
+  onFilterChange: (values: string[]) => void;
 }
 
 export function DataTableFacetedFilter({
@@ -42,6 +43,7 @@ export function DataTableFacetedFilter({
   multiSelect = true,
   onFilterChange,
 }: DataTableFacetedFilterProps) {
+  const { t } = useTranslation(); // ✅ initialize translation
   const selectedValueSet = new Set(selectedValues);
 
   const [open, setOpen] = React.useState(false);
@@ -98,9 +100,11 @@ export function DataTableFacetedFilter({
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0" align="start">
         <Command>
-          <CommandInput placeholder={`Filter ${title}`} />
+          {/* ✅ i18n placeholder */}
+          <CommandInput placeholder={t("dataTable.filterPlaceholder", { title })} />
           <CommandList>
-            <CommandEmpty>No results found.</CommandEmpty>
+            {/* ✅ i18n empty state */}
+            <CommandEmpty>{t("dataTable.noResults")}</CommandEmpty>
             <CommandGroup>
               {options.map((option) => {
                 const isSelected = selectedValueSet.has(option.value);
@@ -111,11 +115,11 @@ export function DataTableFacetedFilter({
                     onSelect={() => {
                       if (multiSelect) {
                         const updatedValues = isSelected
-                          ? selectedValues.filter((val) => val !== option.value) // Remove value
-                          : [...selectedValues, option.value]; // Add value
+                          ? selectedValues.filter((val) => val !== option.value)
+                          : [...selectedValues, option.value];
                         onFilterChange(updatedValues);
                       } else {
-                        onFilterChange(isSelected ? [] : [option.value]); // Single select
+                        onFilterChange(isSelected ? [] : [option.value]);
                         onClose();
                       }
                     }}
@@ -144,11 +148,12 @@ export function DataTableFacetedFilter({
               <>
                 <CommandSeparator />
                 <CommandGroup className="sticky bottom-0 align-bottom bg-white">
+                  {/* ✅ i18n "Clear filters" */}
                   <CommandItem
-                    onSelect={() => onFilterChange([])} // Clear all filters
+                    onSelect={() => onFilterChange([])}
                     className="justify-center text-center"
                   >
-                    Clear filters
+                    {t("dataTable.clearFilters")}
                   </CommandItem>
                 </CommandGroup>
               </>
