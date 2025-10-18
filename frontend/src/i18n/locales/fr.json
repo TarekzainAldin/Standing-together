@@ -16,9 +16,9 @@
   "projects": {
     "label": "Projets",
     "success": "Projet supprimé avec succès",
-    "error": "Une erreur s'est produite",
+    "error": "Une erreur s’est produite",
     "error_occurred": "Erreur lors de la récupération des projets",
-    "no_projects": "Il n'y a pas encore de projets dans cet espace de travail.",
+    "no_projects": "Il n’y a pas encore de projets dans cet espace.",
     "create_project": "Créer un projet",
     "view": "Voir le projet",
     "delete": "Supprimer le projet",
@@ -32,38 +32,38 @@
   "workspace": {
     "label": "Espaces de travail",
     "no_selected": "Aucun espace sélectionné",
-    "free": "Libre",
+    "free": "Gratuit",
     "add": "Ajouter un espace"
   },
   "workspace_form": {
-    "title": "Configurez votre espace de travail d'équipe",
-    "description": "Organisez vos comités et équipes de réponse dans des espaces de travail dédiés",
+    "title": "Configurer votre espace d'équipe",
+    "description": "Organisez vos comités et équipes de réponse dans des espaces dédiés",
     "name_label": "Nom de l'espace de travail",
-    "name_placeholder": "Équipe de réponse d'urgence",
-    "name_description": "Ceci est le nom de votre comité ou équipe de réponse.",
-    "name_required": "Le nom de l'espace de travail est requis",
-    "description_label": "Description de l'espace de travail",
+    "name_placeholder": "Équipe d'intervention d'urgence",
+    "name_description": "C'est le nom de votre comité ou équipe.",
+    "name_required": "Le nom de l'espace est requis",
+    "description_label": "Description de l'espace",
     "description_placeholder": "Décrivez le rôle de votre comité ou équipe ici",
-    "description_description": "Décrivez votre espace de travail afin que votre équipe connaisse son objectif",
+    "description_description": "Décrivez votre espace pour que votre équipe comprenne son objectif",
     "optional": "Optionnel",
-    "create_button": "Créer l'espace de travail",
+    "create_button": "Créer l'espace",
     "error_title": "Erreur"
   },
   "edit_workspace_form": {
     "title": "Modifier l'espace de travail",
     "name_label": "Nom de l'espace de travail",
-    "name_placeholder": "Équipe de réponse d'urgence",
-    "name_required": "Le nom de l'espace de travail est requis",
-    "description_label": "Description de l'espace de travail",
-    "description_placeholder": "Décrivez le rôle de votre comité dans la gestion des catastrophes.",
+    "name_placeholder": "Équipe d'intervention d'urgence",
+    "name_required": "Le nom de l'espace est requis",
+    "description_label": "Description de l'espace",
+    "description_placeholder": "Décrivez le rôle de votre comité ici",
     "description_optional": "Optionnel",
-    "update_button": "Mettre à jour l'espace de travail",
+    "update_button": "Mettre à jour",
     "error_title": "Erreur"
   },
   "analytics": {
-    "total_tasks": "Tâches totales",
+    "total_tasks": "Total des tâches",
     "overdue_tasks": "Tâches en retard",
-    "completed_tasks": "Tâches terminées"
+    "completed_tasks": "Tâches complétées"
   },
   "breadcrumb": {
     "dashboard": "Tableau de bord",
@@ -74,9 +74,9 @@
   },
   "delete_workspace_form": {
     "title": "Supprimer l'espace de travail",
-    "description": "La suppression d'un espace de travail est permanente et irréversible. Toutes les données associées seront supprimées.",
-    "delete_button": "Supprimer l'espace de travail",
-    "confirm_title": "Supprimer l'espace de travail {{name}}",
+    "description": "Supprimer un espace est permanent et irréversible. Toutes les données associées seront supprimées.",
+    "delete_button": "Supprimer l'espace",
+    "confirm_title": "Supprimer l'espace {{name}}",
     "confirm_description": "Êtes-vous sûr de vouloir supprimer ? Cette action est irréversible.",
     "confirm_button": "Supprimer",
     "cancel_button": "Annuler",
@@ -84,45 +84,44 @@
   },
   "members": {
     "title": "Membres",
-    "loading": "Chargement des membres...",
+    "loading": "Chargement...",
     "no_roles": "Aucun rôle trouvé.",
     "role_select_placeholder": "Sélectionner un nouveau rôle...",
-    "admin_description": "Peut voir, créer, modifier des tâches, projets et gérer les paramètres.",
-    "member_description": "Peut uniquement voir et modifier les tâches qu'il a créées.",
-    "success_change_role": "Le rôle du membre a été modifié avec succès",
-    "error_change_role": "Une erreur s'est produite lors du changement du rôle du membre",
+    "admin_description": "Peut voir, créer et modifier les tâches et projets et gérer les paramètres.",
+    "member_description": "Peut uniquement voir et modifier ses propres tâches.",
+    "success_change_role": "Rôle du membre modifié avec succès",
+    "error_change_role": "Erreur lors du changement du rôle du membre",
     "button_change_role": "Changer le rôle"
   },
-  "inviteMembersTitle": "Invitez des membres à vous rejoindre",
-  "inviteMembersDescription": "Toute personne disposant d’un lien d’invitation peut rejoindre cet espace de travail gratuit. Vous pouvez également désactiver et créer un nouveau lien d’invitation à tout moment.",
+  "inviteMembersTitle": "Inviter des membres à vous rejoindre",
+  "inviteMembersDescription": "Toute personne ayant le lien d'invitation peut rejoindre cet espace gratuit. Vous pouvez également le désactiver et créer un nouveau lien à tout moment.",
   "copied": "Copié",
-  "inviteUrlCopied": "Le lien d’invitation a été copié dans le presse-papiers",
+  "inviteUrlCopied": "URL d'invitation copiée dans le presse-papiers",
   "link": "Lien",
-  "joined": "A rejoint",
+  "joined": "Rejoint",
   "unknownDate": "Date inconnue",
-  "noMembers": "Aucun membre trouvé dans cet espace de travail.",
+  "noMembers": "Aucun membre trouvé dans cet espace.",
   "avatarAlt": "Avatar de l'utilisateur",
-
   "projects_form": {
-  "create_title": "Créer un projet",
-  "create_description": "Organisez et gérez les tâches, les ressources et la collaboration de l'équipe",
-  "select_emoji": "Sélectionner un emoji",
-  "name_label": "Titre du projet",
-  "name_placeholder": "Urgence",
-  "name_required": "Le titre du projet est requis",
-  "description_label": "Description du projet",
-  "description_placeholder": "Description du projet",
-  "optional": "Optionnel",
-  "create_button": "Créer",
-  "success_title": "Succès",
-  "success_description": "Projet créé avec succès",
-  "error_title": "Erreur"
-},
- "project_form": {
     "create_title": "Créer un projet",
-    "create_description": "Organisez et gérez les tâches, les ressources et la collaboration de l'équipe",
+    "create_description": "Organiser et gérer les tâches, ressources et collaboration d'équipe",
+    "select_emoji": "Sélectionner un emoji",
+    "name_label": "Titre du projet",
+    "name_placeholder": "Urgence",
+    "name_required": "Le titre du projet est requis",
+    "description_label": "Description du projet",
+    "description_placeholder": "Description du projet",
+    "optional": "Optionnel",
+    "create_button": "Créer",
+    "success_title": "Succès",
+    "success_description": "Projet créé avec succès",
+    "error_title": "Erreur"
+  },
+  "project_form": {
+    "create_title": "Créer un projet",
+    "create_description": "Organiser et gérer les tâches, ressources et collaboration d'équipe",
     "edit_title": "Modifier le projet",
-    "edit_description": "Mettez à jour les détails du projet pour améliorer la gestion des tâches",
+    "edit_description": "Mettre à jour les détails du projet pour affiner la gestion des tâches",
     "select_emoji": "Sélectionner un emoji",
     "name_label": "Titre du projet",
     "name_placeholder": "Urgence",
@@ -139,8 +138,8 @@
   },
   "editProjectForm": {
     "header": "Modifier le projet",
-    "description": "Mettez à jour les détails du projet pour améliorer la gestion des tâches",
-    "select_emoji": "Choisir un emoji",
+    "description": "Mettre à jour les détails du projet pour affiner la gestion des tâches",
+    "select_emoji": "Sélectionner un emoji",
     "project_title": "Titre du projet",
     "project_title_placeholder": "Entrez le titre du projet",
     "project_description": "Description du projet",
@@ -152,10 +151,130 @@
     "project_title_required": "Le titre du projet est requis"
   },
   "projectAnalytics": {
-  "totalTasks": "Nombre total de tâches du projet",
-  "overdueTasks": "Tâches en retard du projet",
-  "completedTasks": "Tâches terminées du projet"
+    "totalTasks": "Total des tâches du projet",
+    "overdueTasks": "Tâches en retard du projet",
+    "completedTasks": "Tâches terminées du projet"
+  },
+  "recentProjects": {
+    "noProjects": "Aucun projet créé pour le moment",
+    "createdBy": "Créé par"
+  },
+  "createTask": {
+    "title": "Créer une tâche",
+    "subtitle": "Organiser les tâches, assigner les membres et gérer les projets d'intervention",
+    "taskTitle": "Titre de la tâche",
+    "taskDescription": "Description de la tâche",
+    "optional": "Optionnel",
+    "project": "Projet",
+    "selectProject": "Sélectionner un projet",
+    "assignedTo": "Assigné à",
+    "selectMember": "Sélectionner un membre",
+    "dueDate": "Date d'échéance",
+    "pickDate": "Choisir une date",
+    "status": "Statut",
+    "selectStatus": "Sélectionner un statut",
+    "priority": "Priorité",
+    "selectPriority": "Sélectionner une priorité",
+    "createButton": "Créer la tâche",
+    "placeholder": {
+      "taskTitle": "Mise en place de la réponse aux inondations",
+      "taskDescription": "Décrire les objectifs et les étapes de cette tâche"
+    },
+    "errors": {
+      "titleRequired": "Le titre est requis",
+      "projectRequired": "Le projet est requis",
+      "statusRequired": "Le statut est requis",
+      "priorityRequired": "La priorité est requise",
+      "assignedToRequired": "La personne assignée est requise",
+      "dueDateRequired": "La date d'échéance est requise"
+    },
+    "toast": {
+      "success": "Tâche créée avec succès",
+      "error": "Une erreur s'est produite"
+    }
+  },
+  "editTask": {
+    "title": "Modifier la tâche",
+    "taskTitle": "Titre de la tâche",
+    "taskDescription": "Description de la tâche",
+    "assignedTo": "Assigné à",
+    "selectMember": "Sélectionner un membre",
+    "dueDate": "Date d'échéance",
+    "pickDate": "Choisir une date",
+    "status": "Statut",
+    "selectStatus": "Sélectionner un statut",
+    "priority": "Priorité",
+    "selectPriority": "Sélectionner une priorité",
+    "saveButton": "Enregistrer les modifications",
+    "unknown": "Inconnu",
+    "placeholder": {
+      "taskTitle": "Titre de la tâche",
+      "taskDescription": "Description"
+    },
+    "errors": {
+      "titleRequired": "Le titre est requis",
+      "assignedToRequired": "La personne assignée est requise",
+      "dueDateRequired": "Une date d'échéance est requise"
+    },
+    "toast": {
+      "success": "Tâche mise à jour avec succès",
+      "error": "Une erreur s'est produite"
+    }
+  },
+  "recentTasks": {
+    "noTask": "Aucune tâche créée pour le moment",
+    "due": "Échéance"
+  },
+  "taskTable": {
+    "filterTasks": "Filtrer les tâches...",
+    "status": "Statut",
+    "priority": "Priorité",
+    "assignedTo": "Assigné à",
+    "projects": "Projets",
+    "reset": "Réinitialiser",
+    "unknown": "Inconnu"
+  },
+  "dataTable": {
+    "sortAsc": "Asc",
+    "sortDesc": "Desc",
+    "hide": "Cacher",
+    "filterPlaceholder": "Filtrer {{title}}...",
+    "noResults": "Aucun résultat trouvé.",
+    "clearFilters": "Effacer les filtres",
+    "showingRows": "Affichage {{from}}-{{to}} sur {{total}} lignes",
+    "rowsPerPage": "Lignes par page",
+    "pageInfo": "Page {{current}} sur {{total}}",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "firstPage": "Aller à la première page",
+    "previousPage": "Aller à la page précédente",
+    "nextPage": "Aller à la page suivante",
+    "lastPage": "Aller à la dernière page",
+    "columns": "Colonnes",
+    "columnNames": {
+      "title": "Titre",
+      "status": "Statut",
+      "priority": "Priorité",
+      "assignedTo": "Assigné à",
+      "dueDate": "Date d'échéance"
+    }
+  },
+  "taskForm": {
+    "editTask": "Modifier la tâche",
+    "deleteTask": "Supprimer la tâche",
+    "deleteTaskConfirm": "Êtes-vous sûr de vouloir supprimer {{taskCode}} ?",
+    "delete": "Supprimer",
+    "cancel": "Annuler",
+    "successUpdate": "Tâche mise à jour avec succès",
+    "errorUpdate": "Erreur lors de la mise à jour de la tâche"
+  },
+  "dashboard": {
+  "workspaceOverview": "Aperçu de l'espace de travail",
+  "workspaceOverviewDescription": "Voici un aperçu de cet espace de travail !",
+  "newProject": "Nouveau projet",
+  "recentProjects": "Projets récents",
+  "recentTasks": "Tâches récentes",
+  "recentMembers": "Membres récents"
 }
-
 
 }

@@ -12,8 +12,10 @@ import { TaskType } from "@/types/api.type";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { Loader } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const RecentTasks = () => {
+  const { t } = useTranslation();
   const workspaceId = useWorkspaceId();
 
   const { data, isLoading } = useQuery({
@@ -30,22 +32,15 @@ const RecentTasks = () => {
 
   return (
     <div className="flex flex-col space-y-6">
-      {isLoading ? (
+      {isLoading && (
         <Loader
-          className="w-8 h-8 
-        animate-spin
-        place-self-center flex
-        "
+          className="w-8 h-8 animate-spin place-self-center flex"
         />
-      ) : null}
+      )}
 
       {tasks?.length === 0 && (
-        <div
-          className="font-semibold
-         text-sm text-muted-foreground
-          text-center py-5"
-        >
-          No Task created yet
+        <div className="font-semibold text-sm text-muted-foreground text-center py-5">
+          {t("recentTasks.noTask")}
         </div>
       )}
 
@@ -68,12 +63,13 @@ const RecentTasks = () => {
                   {task.title}
                 </p>
                 <span className="text-sm text-gray-500">
-                  Due: {task.dueDate ? format(task.dueDate, "PPP") : null}
+                  {t("recentTasks.due")}:{" "}
+                  {task.dueDate ? format(task.dueDate, "PPP") : null}
                 </span>
               </div>
 
               {/* Task Status */}
-              <div className="text-sm font-medium ">
+              <div className="text-sm font-medium">
                 <Badge
                   variant={TaskStatusEnum[task.status]}
                   className="flex w-auto p-1 px-2 gap-1 font-medium shadow-sm uppercase border-0"
@@ -113,72 +109,3 @@ const RecentTasks = () => {
 };
 
 export default RecentTasks;
-
-// const RecentTasks = () => {
-//   const tasks = [
-//     {
-//       id: "Task-12",
-//       title: "You can't compress the program without quanti",
-//       date: "December 29, 2024",
-//       assigneeTo: "EM",
-//     },
-//     {
-//       id: "Task-13",
-//       title: "You can't compress the program without quanti",
-//       date: "December 29, 2024",
-//       assigneeTo: "EM",
-//     },
-//     {
-//       id: "Task-14",
-//       title: "You can't compress the program without quanti",
-//       date: "December 29, 2024",
-//       assigneeTo: "EM",
-//     },
-//     {
-//       id: "Task-15",
-//       title: "You can't compress the program without quanti",
-//       date: "December 29, 2024",
-//       assigneeTo: "EM",
-//     },
-//     {
-//       id: "Task-16",
-//       title: "You can't compress the program without quanti",
-//       date: "December 29, 2024",
-//       assigneeTo: "EM",
-//     },
-//   ];
-//   return (
-//     <div className="flex flex-col pt-2">
-//       <ul role="list" className="space-y-2">
-//         {tasks.map((item, index) => (
-//           <li
-//             key={index}
-//             role="listitem"
-//             className="shadow-none border-0 py-2 hover:bg-[#fbfbfb] transition-colors ease-in-out "
-//           >
-//             <div className="grid grid-cols-7 gap-1 p-0">
-//               <div className="shrink">
-//                 <p>{item.id}</p>
-//               </div>
-//               <div className="col-span-2">
-//                 <p className="text-sm font-medium leading-none">{item.title}</p>
-//               </div>
-//               <div>dueDate</div>
-//               <div>Todo</div>
-//               <div>High</div>
-//               <div className="flex items-center gap-4 place-self-end">
-//                 <span className="text-sm text-gray-500">Assigned To</span>
-//                 <Avatar className="hidden h-9 w-9 sm:flex">
-//                   <AvatarImage src="/avatars/01.png" alt="Avatar" />
-//                   <AvatarFallback>{item.assigneeTo}</AvatarFallback>
-//                 </Avatar>
-//               </div>
-//             </div>
-//           </li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// };
-
-// export default RecentTasks;

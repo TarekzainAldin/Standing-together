@@ -1,10 +1,10 @@
 {
   "sidebar": {
     "download_report": "تحميل التقرير",
-    "current_workspace": "مساحة العمل الحالية",
-    "all_workspaces": "جميع مساحات العمل",
+    "current_workspace": "المساحة الحالية",
+    "all_workspaces": "كل المساحات",
     "logout": "تسجيل الخروج",
-    "generating": "جاري الإنشاء..."
+    "generating": "جارٍ الإنشاء..."
   },
   "nav": {
     "dashboard": "لوحة التحكم",
@@ -18,7 +18,7 @@
     "success": "تم حذف المشروع بنجاح",
     "error": "حدث خطأ",
     "error_occurred": "حدث خطأ أثناء جلب المشاريع",
-    "no_projects": "لا يوجد مشاريع في مساحة العمل هذه بعد.",
+    "no_projects": "لا توجد مشاريع في هذه المساحة بعد.",
     "create_project": "إنشاء مشروع",
     "view": "عرض المشروع",
     "delete": "حذف المشروع",
@@ -27,37 +27,37 @@
     "confirm_delete_button": "حذف",
     "cancel": "إلغاء",
     "more": "المزيد",
-    "loading": "جاري التحميل..."
+    "loading": "جارٍ التحميل..."
   },
   "workspace": {
-    "label": "مساحات العمل",
-    "no_selected": "لم يتم اختيار أي مساحة",
+    "label": "المساحات",
+    "no_selected": "لم يتم اختيار مساحة",
     "free": "مجاني",
     "add": "إضافة مساحة"
   },
   "workspace_form": {
-    "title": "إعداد مساحة العمل لفريقك",
-    "description": "نظّم لجانك وفرق الاستجابة في مساحات عمل مخصصة",
+    "title": "إعداد مساحة عمل الفريق",
+    "description": "نظّم لجانك وفرق الاستجابة في مساحات مخصصة",
     "name_label": "اسم مساحة العمل",
     "name_placeholder": "فريق الاستجابة للطوارئ",
-    "name_description": "هذا هو اسم لجنتك أو فريق الاستجابة الخاص بك.",
+    "name_description": "هذا هو اسم لجنتك أو فريقك.",
     "name_required": "اسم مساحة العمل مطلوب",
     "description_label": "وصف مساحة العمل",
     "description_placeholder": "صف دور لجنتك أو فريقك هنا",
-    "description_description": "صف مساحة العمل الخاصة بك حتى يعرف فريقك هدفها",
+    "description_description": "صف الغرض من مساحة العمل ليعرف الفريق الهدف",
     "optional": "اختياري",
-    "create_button": "إنشاء مساحة العمل",
+    "create_button": "إنشاء مساحة",
     "error_title": "خطأ"
   },
   "edit_workspace_form": {
     "title": "تعديل مساحة العمل",
     "name_label": "اسم مساحة العمل",
     "name_placeholder": "فريق الاستجابة للطوارئ",
-    "name_required": "اسم مساحة العمل مطلوب",
-    "description_label": "وصف مساحة العمل",
-    "description_placeholder": "صف دور لجنتك في إدارة الكوارث.",
+    "name_required": "اسم المساحة مطلوب",
+    "description_label": "وصف المساحة",
+    "description_placeholder": "صف دور لجنتك هنا",
     "description_optional": "اختياري",
-    "update_button": "تحديث مساحة العمل",
+    "update_button": "تحديث",
     "error_title": "خطأ"
   },
   "analytics": {
@@ -74,61 +74,60 @@
   },
   "delete_workspace_form": {
     "title": "حذف مساحة العمل",
-    "description": "حذف مساحة العمل إجراء دائم ولا يمكن التراجع عنه. سيتم حذف جميع البيانات المرتبطة بها.",
-    "delete_button": "حذف مساحة العمل",
-    "confirm_title": "حذف مساحة العمل {{name}}",
-    "confirm_description": "هل أنت متأكد أنك تريد الحذف؟ هذا الإجراء لا يمكن التراجع عنه.",
+    "description": "حذف المساحة دائم ولا يمكن التراجع عنه. سيتم إزالة جميع البيانات المرتبطة.",
+    "delete_button": "حذف المساحة",
+    "confirm_title": "حذف مساحة {{name}}",
+    "confirm_description": "هل أنت متأكد أنك تريد الحذف؟ لا يمكن التراجع عن هذا الإجراء.",
     "confirm_button": "حذف",
     "cancel_button": "إلغاء",
     "error_title": "خطأ"
   },
   "members": {
     "title": "الأعضاء",
-    "loading": "جارٍ تحميل الأعضاء...",
-    "no_roles": "لم يتم العثور على أي أدوار.",
+    "loading": "جارٍ التحميل...",
+    "no_roles": "لا توجد أدوار.",
     "role_select_placeholder": "اختر دورًا جديدًا...",
-    "admin_description": "يمكنه عرض وإنشاء وتعديل المهام والمشاريع وإدارة الإعدادات.",
-    "member_description": "يمكنه فقط عرض وتعديل المهام التي أنشأها.",
+    "admin_description": "يمكنه عرض وإنشاء وتحرير المهام والمشاريع وإدارة الإعدادات.",
+    "member_description": "يمكنه عرض وتحرير المهام التي أنشأها فقط.",
     "success_change_role": "تم تغيير دور العضو بنجاح",
-    "error_change_role": "حدث خطأ أثناء تغيير دور العضو",
+    "error_change_role": "حدث خطأ أثناء تغيير الدور",
     "button_change_role": "تغيير الدور"
   },
-  "inviteMembersTitle": "دعوة الأعضاء للانضمام إليك",
-  "inviteMembersDescription": "يمكن لأي شخص لديه رابط الدعوة الانضمام إلى مساحة العمل هذه مجانًا. يمكنك أيضًا تعطيل الرابط وإنشاء رابط جديد في أي وقت.",
+  "inviteMembersTitle": "دعوة الأعضاء للانضمام",
+  "inviteMembersDescription": "يمكن لأي شخص لديه رابط دعوة الانضمام إلى هذه المساحة المجانية. يمكنك تعطيله أو إنشاء رابط جديد في أي وقت.",
   "copied": "تم النسخ",
-  "inviteUrlCopied": "تم نسخ رابط الدعوة إلى الحافظة",
+  "inviteUrlCopied": "تم نسخ رابط الدعوة",
   "link": "الرابط",
-  "joined": "انضم في",
+  "joined": "انضم",
   "unknownDate": "تاريخ غير معروف",
-  "noMembers": "لا يوجد أعضاء في مساحة العمل هذه.",
+  "noMembers": "لا يوجد أعضاء في هذه المساحة.",
   "avatarAlt": "صورة المستخدم",
-
   "projects_form": {
-  "create_title": "إنشاء مشروع",
-  "create_description": "نظّم وأدر المهام والموارد وتعاون الفريق بسهولة",
-  "select_emoji": "اختر رمز تعبيري",
-  "name_label": "عنوان المشروع",
-  "name_placeholder": "طوارئ",
-  "name_required": "عنوان المشروع مطلوب",
-  "description_label": "وصف المشروع",
-  "description_placeholder": "أدخل وصف المشروع",
-  "optional": "اختياري",
-  "create_button": "إنشاء",
-  "success_title": "تم بنجاح",
-  "success_description": "تم إنشاء المشروع بنجاح",
-  "error_title": "خطأ"
-},
- "project_form": {
     "create_title": "إنشاء مشروع",
-    "create_description": "نظم المهام والموارد وتعاون الفريق بكفاءة",
-    "edit_title": "تعديل المشروع",
-    "edit_description": "قم بتحديث تفاصيل المشروع لتحسين إدارة المهام",
+    "create_description": "تنظيم وإدارة المهام والموارد والتعاون بين الفريق",
     "select_emoji": "اختر رمز تعبيري",
     "name_label": "عنوان المشروع",
-    "name_placeholder": "مشروع الطوارئ",
+    "name_placeholder": "طوارئ",
     "name_required": "عنوان المشروع مطلوب",
     "description_label": "وصف المشروع",
-    "description_placeholder": "أدخل وصف المشروع هنا",
+    "description_placeholder": "وصف المشروع",
+    "optional": "اختياري",
+    "create_button": "إنشاء",
+    "success_title": "تم بنجاح",
+    "success_description": "تم إنشاء المشروع بنجاح",
+    "error_title": "خطأ"
+  },
+  "project_form": {
+    "create_title": "إنشاء مشروع",
+    "create_description": "تنظيم وإدارة المهام والموارد والتعاون بين الفريق",
+    "edit_title": "تعديل المشروع",
+    "edit_description": "تحديث تفاصيل المشروع لتحسين إدارة المهام",
+    "select_emoji": "اختر رمز تعبيري",
+    "name_label": "عنوان المشروع",
+    "name_placeholder": "طوارئ",
+    "name_required": "عنوان المشروع مطلوب",
+    "description_label": "وصف المشروع",
+    "description_placeholder": "وصف المشروع",
     "optional": "اختياري",
     "create_button": "إنشاء",
     "update_button": "تحديث",
@@ -137,9 +136,9 @@
     "error_create": "حدث خطأ أثناء إنشاء المشروع",
     "error_update": "حدث خطأ أثناء تحديث المشروع"
   },
-   "editProjectForm": {
+  "editProjectForm": {
     "header": "تعديل المشروع",
-    "description": "قم بتحديث تفاصيل المشروع لتحسين إدارة المهام",
+    "description": "تحديث تفاصيل المشروع لتحسين إدارة المهام",
     "select_emoji": "اختر رمز تعبيري",
     "project_title": "عنوان المشروع",
     "project_title_placeholder": "أدخل عنوان المشروع",
@@ -147,15 +146,134 @@
     "project_description_placeholder": "أدخل وصف المشروع",
     "optional": "اختياري",
     "update_button": "تحديث",
-    "success_title": "نجاح",
+    "success_title": "تم بنجاح",
     "error_title": "خطأ",
     "project_title_required": "عنوان المشروع مطلوب"
   },
   "projectAnalytics": {
-  "totalTasks": "إجمالي مهام المشروع",
-  "overdueTasks": "المهام المتأخرة في المشروع",
-  "completedTasks": "المهام المكتملة في المشروع"
+    "totalTasks": "إجمالي مهام المشروع",
+    "overdueTasks": "المهام المتأخرة في المشروع",
+    "completedTasks": "المهام المكتملة في المشروع"
+  },
+  "recentProjects": {
+    "noProjects": "لم يتم إنشاء أي مشروع بعد",
+    "createdBy": "تم الإنشاء بواسطة"
+  },
+  "createTask": {
+    "title": "إنشاء مهمة",
+    "subtitle": "تنظيم المهام، تعيين الأعضاء وإدارة مشاريع الاستجابة للكوارث",
+    "taskTitle": "عنوان المهمة",
+    "taskDescription": "وصف المهمة",
+    "optional": "اختياري",
+    "project": "المشروع",
+    "selectProject": "اختر المشروع",
+    "assignedTo": "مخصص لـ",
+    "selectMember": "اختر العضو",
+    "dueDate": "تاريخ الاستحقاق",
+    "pickDate": "اختر التاريخ",
+    "status": "الحالة",
+    "selectStatus": "اختر الحالة",
+    "priority": "الأولوية",
+    "selectPriority": "اختر الأولوية",
+    "createButton": "إنشاء المهمة",
+    "placeholder": {
+      "taskTitle": "إعداد استجابة للفيضانات",
+      "taskDescription": "وصف الأهداف والخطوات لهذه المهمة"
+    },
+    "errors": {
+      "titleRequired": "العنوان مطلوب",
+      "projectRequired": "المشروع مطلوب",
+      "statusRequired": "الحالة مطلوبة",
+      "priorityRequired": "الأولوية مطلوبة",
+      "assignedToRequired": "يجب تحديد العضو",
+      "dueDateRequired": "تاريخ الاستحقاق مطلوب"
+    },
+    "toast": {
+      "success": "تم إنشاء المهمة بنجاح",
+      "error": "حدث خطأ"
+    }
+  },
+  "editTask": {
+    "title": "تعديل المهمة",
+    "taskTitle": "عنوان المهمة",
+    "taskDescription": "وصف المهمة",
+    "assignedTo": "مخصص لـ",
+    "selectMember": "اختر العضو",
+    "dueDate": "تاريخ الاستحقاق",
+    "pickDate": "اختر التاريخ",
+    "status": "الحالة",
+    "selectStatus": "اختر الحالة",
+    "priority": "الأولوية",
+    "selectPriority": "اختر الأولوية",
+    "saveButton": "حفظ التغييرات",
+    "unknown": "غير معروف",
+    "placeholder": {
+      "taskTitle": "عنوان المهمة",
+      "taskDescription": "الوصف"
+    },
+    "errors": {
+      "titleRequired": "العنوان مطلوب",
+      "assignedToRequired": "يجب تحديد العضو",
+      "dueDateRequired": "تاريخ الاستحقاق مطلوب"
+    },
+    "toast": {
+      "success": "تم تحديث المهمة بنجاح",
+      "error": "حدث خطأ"
+    }
+  },
+  "recentTasks": {
+    "noTask": "لم يتم إنشاء أي مهمة بعد",
+    "due": "تاريخ الاستحقاق"
+  },
+  "taskTable": {
+    "filterTasks": "تصفية المهام...",
+    "status": "الحالة",
+    "priority": "الأولوية",
+    "assignedTo": "مخصص لـ",
+    "projects": "المشاريع",
+    "reset": "إعادة تعيين",
+    "unknown": "غير معروف"
+  },
+  "dataTable": {
+    "sortAsc": "تصاعدي",
+    "sortDesc": "تنازلي",
+    "hide": "إخفاء",
+    "filterPlaceholder": "تصفية {{title}}...",
+    "noResults": "لا توجد نتائج.",
+    "clearFilters": "مسح الفلاتر",
+    "showingRows": "عرض {{from}}-{{to}} من أصل {{total}} صف",
+    "rowsPerPage": "عدد الصفوف لكل صفحة",
+    "pageInfo": "الصفحة {{current}} من {{total}}",
+    "previous": "السابق",
+    "next": "التالي",
+    "firstPage": "الذهاب للصفحة الأولى",
+    "previousPage": "الصفحة السابقة",
+    "nextPage": "الصفحة التالية",
+    "lastPage": "الصفحة الأخيرة",
+    "columns": "الأعمدة",
+    "columnNames": {
+      "title": "العنوان",
+      "status": "الحالة",
+      "priority": "الأولوية",
+      "assignedTo": "مخصص لـ",
+      "dueDate": "تاريخ الاستحقاق"
+    }
+  },
+  "taskForm": {
+    "editTask": "تعديل المهمة",
+    "deleteTask": "حذف المهمة",
+    "deleteTaskConfirm": "هل أنت متأكد أنك تريد حذف {{taskCode}}؟",
+    "delete": "حذف",
+    "cancel": "إلغاء",
+    "successUpdate": "تم تحديث المهمة بنجاح",
+    "errorUpdate": "حدث خطأ أثناء تحديث المهمة"
+  },
+  "dashboard": {
+  "workspaceOverview": "نظرة عامة على مساحة العمل",
+  "workspaceOverviewDescription": "إليك نظرة عامة على مساحة العمل هذه!",
+  "newProject": "مشروع جديد",
+  "recentProjects": "المشاريع الأخيرة",
+  "recentTasks": "المهام الأخيرة",
+  "recentMembers": "الأعضاء الجدد"
 }
-
-
 }

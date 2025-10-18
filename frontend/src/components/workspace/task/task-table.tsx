@@ -16,6 +16,7 @@ import useGetProjectsInWorkspaceQuery from "@/hooks/api/use-get-projects";
 import useGetWorkspaceMembers from "@/hooks/api/use-get-workspace-members";
 import { getAvatarColor, getAvatarFallbackText } from "@/lib/helper";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useTranslation } from "react-i18next"; // ✅ import i18n hook
 
 type Filters = ReturnType<typeof useTaskTableFilter>[0];
 type SetFilters = ReturnType<typeof useTaskTableFilter>[1];
@@ -28,6 +29,7 @@ interface DataTableFilterToolbarProps {
 }
 
 const TaskTable = () => {
+  useTranslation();
   const param = useParams();
   const projectId = param.projectId as string;
 
@@ -64,14 +66,8 @@ const TaskTable = () => {
   const tasks: TaskType[] = data?.tasks || [];
   const totalCount = data?.pagination.totalCount || 0;
 
-  const handlePageChange = (page: number) => {
-    setPageNumber(page);
-  };
-
-  // Handle page size changes
-  const handlePageSizeChange = (size: number) => {
-    setPageSize(size);
-  };
+  const handlePageChange = (page: number) => setPageNumber(page);
+  const handlePageSizeChange = (size: number) => setPageSize(size);
 
   return (
     <div className="w-full relative">
@@ -105,33 +101,27 @@ const DataTableFilterToolbar: FC<DataTableFilterToolbarProps> = ({
   filters,
   setFilters,
 }) => {
+  const { t } = useTranslation();
   const workspaceId = useWorkspaceId();
 
-  const { data } = useGetProjectsInWorkspaceQuery({
-    workspaceId,
-  });
-
+  const { data } = useGetProjectsInWorkspaceQuery({ workspaceId });
   const { data: memberData } = useGetWorkspaceMembers(workspaceId);
 
   const projects = data?.projects || [];
   const members = memberData?.members || [];
 
-  //Workspace Projects
-  const projectOptions = projects?.map((project) => {
-    return {
-      label: (
-        <div className="flex items-center gap-1">
-          <span>{project.emoji}</span>
-          <span>{project.name}</span>
-        </div>
-      ),
-      value: project._id,
-    };
-  });
+  const projectOptions = projects?.map((project) => ({
+    label: (
+      <div className="flex items-center gap-1">
+        <span>{project.emoji}</span>
+        <span>{project.name}</span>
+      </div>
+    ),
+    value: project._id,
+  }));
 
-  // Workspace Memebers
   const assigneesOptions = members?.map((member) => {
-    const name = member.userId?.name || "Unknown";
+    const name = member.userId?.name || t("taskTable.unknown");
     const initials = getAvatarFallbackText(name);
     const avatarColor = getAvatarColor(name);
 
@@ -157,20 +147,18 @@ const DataTableFilterToolbar: FC<DataTableFilterToolbarProps> = ({
   };
 
   return (
-    <div className="flex flex-col lg:flex-row w-full items-start space-y-2 mb-2 lg:mb-0 lg:space-x-2  lg:space-y-0">
+    <div className="flex flex-col lg:flex-row w-full items-start space-y-2 mb-2 lg:mb-0 lg:space-x-2 lg:space-y-0">
       <Input
-        placeholder="Filter tasks..."
+        placeholder={t("taskTable.filterTasks")}
         value={filters.keyword || ""}
         onChange={(e) =>
-          setFilters({
-            keyword: e.target.value,
-          })
+          setFilters({ ...filters, keyword: e.target.value })
         }
         className="h-8 w-full lg:w-[250px]"
       />
-      {/* Status filter */}
+
       <DataTableFacetedFilter
-        title="Status"
+        title={t("taskTable.status")}
         multiSelect={true}
         options={statuses}
         disabled={isLoading}
@@ -178,9 +166,8 @@ const DataTableFilterToolbar: FC<DataTableFilterToolbarProps> = ({
         onFilterChange={(values) => handleFilterChange("status", values)}
       />
 
-      {/* Priority filter */}
       <DataTableFacetedFilter
-        title="Priority"
+        title={t("taskTable.priority")}
         multiSelect={true}
         options={priorities}
         disabled={isLoading}
@@ -188,9 +175,8 @@ const DataTableFilterToolbar: FC<DataTableFilterToolbarProps> = ({
         onFilterChange={(values) => handleFilterChange("priority", values)}
       />
 
-      {/* Assigned To filter */}
       <DataTableFacetedFilter
-        title="Assigned To"
+        title={t("taskTable.assignedTo")}
         multiSelect={true}
         options={assigneesOptions}
         disabled={isLoading}
@@ -200,7 +186,7 @@ const DataTableFilterToolbar: FC<DataTableFilterToolbarProps> = ({
 
       {!projectId && (
         <DataTableFacetedFilter
-          title="Projects"
+          title={t("taskTable.projects")}
           multiSelect={false}
           options={projectOptions}
           disabled={isLoading}
@@ -209,9 +195,7 @@ const DataTableFilterToolbar: FC<DataTableFilterToolbarProps> = ({
         />
       )}
 
-      {Object.values(filters).some(
-        (value) => value !== null && value !== ""
-      ) && (
+      {Object.values(filters).some((value) => value !== null && value !== "") && (
         <Button
           disabled={isLoading}
           variant="ghost"
@@ -226,7 +210,7 @@ const DataTableFilterToolbar: FC<DataTableFilterToolbarProps> = ({
             })
           }
         >
-          Reset
+          {t("taskTable.reset")}
           <X />
         </Button>
       )}
