@@ -150,6 +150,12 @@
     "success_title": "نجاح",
     "error_title": "خطأ",
     "project_title_required": "عنوان المشروع مطلوب"
-  }
+  },
+  "projectAnalytics": {
+  "totalTasks": "إجمالي مهام المشروع",
+  "overdueTasks": "المهام المتأخرة في المشروع",
+  "completedTasks": "المهام المكتملة في المشروع"
+}
+
 
 }

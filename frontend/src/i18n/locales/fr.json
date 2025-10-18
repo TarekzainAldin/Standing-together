@@ -150,6 +150,12 @@
     "success_title": "Succès",
     "error_title": "Erreur",
     "project_title_required": "Le titre du projet est requis"
-  }
+  },
+  "projectAnalytics": {
+  "totalTasks": "Nombre total de tâches du projet",
+  "overdueTasks": "Tâches en retard du projet",
+  "completedTasks": "Tâches terminées du projet"
+}
+
 
 }
