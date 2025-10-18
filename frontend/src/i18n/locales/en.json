@@ -151,5 +151,11 @@
     "success_title": "Success",
     "error_title": "Error",
     "project_title_required": "Project title is required"
-  }
+  },
+ "projectAnalytics": {
+  "totalTasks": "Total Project Tasks",
+  "overdueTasks": "Overdue Project Tasks",
+  "completedTasks": "Completed Project Tasks"
+}
+
 }
