@@ -10,13 +10,22 @@ import { Toaster } from "./components/ui/toaster.tsx";
 // ✅ استدعاء i18n قبل App
 import "./i18n/i18n"; 
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <QueryProvider>
-      <NuqsAdapter>
-        <App />
-      </NuqsAdapter>
-      <Toaster />
-    </QueryProvider>
-  </StrictMode>
-);
+import { useStoreBase } from "@/store/store";
+
+async function initApp() {
+  // ✅ إعادة تهيئة Zustand قبل عرض التطبيق
+  await useStoreBase.persist.rehydrate();
+
+  createRoot(document.getElementById("root")!).render(
+    <StrictMode>
+      <QueryProvider>
+        <NuqsAdapter>
+          <App />
+        </NuqsAdapter>
+        <Toaster />
+      </QueryProvider>
+    </StrictMode>
+  );
+}
+
+initApp();
