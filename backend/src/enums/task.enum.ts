@@ -10,6 +10,7 @@ export const TaskPriorityEnum = {
   LOW: "LOW",
   MEDIUM: "MEDIUM",
   HIGH: "HIGH",
+  UrGENT:"URGENT"
 } as const;
 
 export type TaskStatusEnumType = keyof typeof TaskStatusEnum;
