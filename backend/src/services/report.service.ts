@@ -25,13 +25,15 @@ export const generateAnalysisReport = async (): Promise<string> => {
   const reportsDir = path.join(__dirname, "../reports");
   if (!fs.existsSync(reportsDir)) fs.mkdirSync(reportsDir);
 
-  // جلب كل المساحات كـ Lean objects
-  const workspaces: WorkspaceDocument[] = await WorkspaceModel.find().lean();
+  // استخدام lean مع Generic
+  const workspaces = await WorkspaceModel.find().lean<WorkspaceDocument[]>();
 
   for (const ws of workspaces) {
-    const projects: ProjectDocument[] = await ProjectModel.find({ workspace: ws._id }).lean();
+    const projects = await ProjectModel.find({ workspace: ws._id }).lean<ProjectDocument[]>();
+
     for (const project of projects) {
-      const tasks: TaskDocument[] = await TaskModel.find({ project: project._id }).lean();
+      const tasks = await TaskModel.find({ project: project._id }).lean<TaskDocument[]>();
+
       if (tasks.length > 0) {
         for (const task of tasks) {
           worksheet.addRow({
@@ -47,6 +49,7 @@ export const generateAnalysisReport = async (): Promise<string> => {
         worksheet.addRow({ workspace: ws.name, project: project.name });
       }
     }
+
     if (projects.length === 0) {
       worksheet.addRow({ workspace: ws.name });
     }
@@ -62,8 +65,12 @@ export const generateAnalysisReport = async (): Promise<string> => {
 /**
  * تقرير لمساحة عمل واحدة
  */
-export const generateSingleWorkspaceReport = async (workspaceId: string): Promise<string> => {
-  const workspace: WorkspaceDocument | null = await WorkspaceModel.findById(workspaceId).lean();
+export const generateSingleWorkspaceReport = async (
+  workspaceId: string
+): Promise<string> => {
+  // lean مع Generic
+  const workspace = await WorkspaceModel.findById(workspaceId).lean<WorkspaceDocument | null>();
+
   if (!workspace) throw new Error("Workspace not found");
 
   const workbook = new ExcelJS.Workbook();
@@ -81,9 +88,11 @@ export const generateSingleWorkspaceReport = async (workspaceId: string): Promis
   const reportsDir = path.join(__dirname, "../reports");
   if (!fs.existsSync(reportsDir)) fs.mkdirSync(reportsDir);
 
-  const projects: ProjectDocument[] = await ProjectModel.find({ workspace: workspace._id }).lean();
+  const projects = await ProjectModel.find({ workspace: workspace._id }).lean<ProjectDocument[]>();
+
   for (const project of projects) {
-    const tasks: TaskDocument[] = await TaskModel.find({ project: project._id }).lean();
+    const tasks = await TaskModel.find({ project: project._id }).lean<TaskDocument[]>();
+
     if (tasks.length > 0) {
       for (const task of tasks) {
         worksheet.addRow({
@@ -99,12 +108,16 @@ export const generateSingleWorkspaceReport = async (workspaceId: string): Promis
       worksheet.addRow({ workspace: workspace.name, project: project.name });
     }
   }
+
   if (projects.length === 0) {
     worksheet.addRow({ workspace: workspace.name });
   }
 
   const today = new Date().toISOString().split("T")[0];
-  const filePath = path.join(reportsDir, `Report_${workspace.name}_${today}.xlsx`);
+  const filePath = path.join(
+    reportsDir,
+    `Report_${workspace.name}_${today}.xlsx`
+  );
   await workbook.xlsx.writeFile(filePath);
 
   return filePath;
