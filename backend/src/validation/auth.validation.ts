@@ -3,7 +3,7 @@ import { z } from "zod";
 export const emailSchema = z
   .string()
   .trim()
-  .email("Invalid email address")
+  .email("test@gmail.com")
   .min(1)
   .max(255);
 
