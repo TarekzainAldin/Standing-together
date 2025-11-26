@@ -14,7 +14,7 @@ Built with **Node.js, Express, MongoDB, and Passport.js**, it integrates with a 
 - 🌐 CORS-enabled frontend integration  
 - ⚡ RESTful API structure  
 
----
+----
 
 ## 🛠 Tech Stack
 - **Node.js** + **Express.js**  
