@@ -24,7 +24,7 @@ const project_route_1 = __importDefault(require("./routes/project.route"));
 const task_route_1 = __importDefault(require("./routes/task.route"));
 const passport_config_1 = require("./config/passport.config");
 // import { BadRequestException } from "./utils/appError";
-const report_route_1 = __importDefault(require("../src/routes/report.route"));
+const report_route_1 = __importDefault(require("./routes/report.route"));
 const app = (0, express_1.default)();
 const BASE_PATH = app_config_1.config.BASE_PATH;
 app.use(express_1.default.json());

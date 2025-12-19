@@ -20,7 +20,8 @@ import projectRoutes from "./routes/project.route";
 import taskRoutes from "./routes/task.route";
 import { passportAuthenticateJWT } from "./config/passport.config";
 // import { BadRequestException } from "./utils/appError";
-import reportRoutes from "../src/routes/report.route";
+import reportRoutes from "./routes/report.route";
+
 
 const app = express();
 const BASE_PATH = config.BASE_PATH;

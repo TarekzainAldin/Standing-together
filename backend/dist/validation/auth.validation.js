@@ -5,7 +5,7 @@ const zod_1 = require("zod");
 exports.emailSchema = zod_1.z
     .string()
     .trim()
-    .email("Invalid email address")
+    .email("test@gmail.com")
     .min(1)
     .max(255);
 exports.passwordSchema = zod_1.z.string().trim().min(4);
