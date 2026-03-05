@@ -44,6 +44,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
 // app.use(passport.session());
 
+
+// );
 app.use(
   cors({
     origin: config.FRONTEND_ORIGIN,
@@ -70,7 +72,11 @@ app.use(`${BASE_PATH}/task`, passportAuthenticateJWT, taskRoutes);
 app.use(`${BASE_PATH}/reports`,reportRoutes);
 app.use(errorHandler);
 
-app.listen(config.PORT, async () => {
-  console.log(`Server listening on port ${config.PORT} in ${config.NODE_ENV}`);
+// app.listen(config.PORT,async () => {
+//   console.log(`Server listening on port ${config.PORT} in ${config.NODE_ENV}`);
+//   await connectDatabase();
+// });
+app.listen(Number(config.PORT), "0.0.0.0", async () => {
+  console.log(`Server listening on port ${config.PORT}`);
   await connectDatabase();
 });

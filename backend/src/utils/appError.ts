@@ -69,3 +69,15 @@ export class UnauthorizedException extends AppError {
     );
   }
 }
+export class ForbiddenException extends AppError {
+  constructor(
+    message = "You do not have the necessary permissions to perform this action",
+    errorCode?: ErrorCodeEnumType
+  ) {
+    super(
+      message,
+      HTTPSTATUS.FORBIDDEN,
+      errorCode || ErrorCodeEnum.ACCESS_FORBIDDEN
+    );
+  }
+}

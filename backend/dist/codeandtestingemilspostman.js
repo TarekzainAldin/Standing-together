@@ -4,6 +4,10 @@
 //     "password": "TeryZin123"
 // }
 // {
+//  "email": "jury55@example.com",
+// "password": "juryZin123"
+// }
+// {
 //     "message": "User workspaces fetched successfully",
 //     "workspaces": [
 //         {

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UnauthorizedException = exports.BadRequestException = exports.NotFoundException = exports.InternalServerException = exports.HttpException = exports.AppError = void 0;
+exports.ForbiddenException = exports.UnauthorizedException = exports.BadRequestException = exports.NotFoundException = exports.InternalServerException = exports.HttpException = exports.AppError = void 0;
 const http_config_1 = require("../config/http.config");
 const error_code_enum_1 = require("../enums/error-code.enum");
 class AppError extends Error {
@@ -43,3 +43,9 @@ class UnauthorizedException extends AppError {
     }
 }
 exports.UnauthorizedException = UnauthorizedException;
+class ForbiddenException extends AppError {
+    constructor(message = "You do not have the necessary permissions to perform this action", errorCode) {
+        super(message, http_config_1.HTTPSTATUS.FORBIDDEN, errorCode || error_code_enum_1.ErrorCodeEnum.ACCESS_FORBIDDEN);
+    }
+}
+exports.ForbiddenException = ForbiddenException;
