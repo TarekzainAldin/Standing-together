@@ -2,7 +2,10 @@
 //     "email": "tery@example.com",
 //     "password": "TeryZin123"
 // }
-
+// {
+//  "email": "jury55@example.com",
+// "password": "juryZin123"
+// }
 
 
 // {

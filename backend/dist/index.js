@@ -41,6 +41,7 @@ app.use(express_1.default.urlencoded({ extended: true }));
 // );
 app.use(passport_1.default.initialize());
 // app.use(passport.session());
+// );
 app.use((0, cors_1.default)({
     origin: app_config_1.config.FRONTEND_ORIGIN,
     credentials: true,
@@ -58,7 +59,11 @@ app.use(`${BASE_PATH}/project`, passport_config_1.passportAuthenticateJWT, proje
 app.use(`${BASE_PATH}/task`, passport_config_1.passportAuthenticateJWT, task_route_1.default);
 app.use(`${BASE_PATH}/reports`, report_route_1.default);
 app.use(errorHandler_middleware_1.errorHandler);
-app.listen(app_config_1.config.PORT, async () => {
-    console.log(`Server listening on port ${app_config_1.config.PORT} in ${app_config_1.config.NODE_ENV}`);
+// app.listen(config.PORT,async () => {
+//   console.log(`Server listening on port ${config.PORT} in ${config.NODE_ENV}`);
+//   await connectDatabase();
+// });
+app.listen(Number(app_config_1.config.PORT), "0.0.0.0", async () => {
+    console.log(`Server listening on port ${app_config_1.config.PORT}`);
     await (0, database_config_1.default)();
 });

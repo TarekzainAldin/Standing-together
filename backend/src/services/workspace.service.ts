@@ -3,7 +3,7 @@ import { Roles } from "../enums/role.enum";
 import RoleModel from "../models/roles-permission.model";
 import UserModel from "../models/user.model";
 import WorkspaceModel from "../models/workspace.model";
-import { BadRequestException, NotFoundException } from "../utils/appError";
+import { BadRequestException, NotFoundException,ForbiddenException  } from "../utils/appError";
 import MemberModel from "../models/member.model";
 import TaskModel from "../models/task.model";
 import { TaskStatusEnum } from "../enums/task.enum";
@@ -208,11 +208,18 @@ export const deleteWorkspaceService = async (
     }
 
     // Check if the user owns the workspace
+    // if (!workspace.owner.equals(new mongoose.Types.ObjectId(userId))) { 
+    //   // throw new BadRequestException(
+    //   //   "You are not authorized to delete this workspace"
+      
+    //   throw new ForbiddenException(
+    // "You do not have permission to delete this workspace"
+
+    //   );
+    // }
     if (!workspace.owner.equals(new mongoose.Types.ObjectId(userId))) { 
-      throw new BadRequestException(
-        "You are not authorized to delete this workspace"
-      );
-    }
+      throw new ForbiddenException ();
+}
 
     const user = await UserModel.findById(userId).session(session);
     if (!user) {
@@ -244,14 +251,15 @@ export const deleteWorkspaceService = async (
     await workspace.deleteOne({ session });
 
     await session.commitTransaction();
-
+    console.log("Transaction aborted, rollback executed");
     session.endSession();
-
+    console.log("end session ");
     return {
       currentWorkspace: user.currentWorkspace,
     };
   } catch (error) {
     await session.abortTransaction();
+    console.log("Transaction aborted, rollback executed");
     session.endSession();
     throw error;
   }
