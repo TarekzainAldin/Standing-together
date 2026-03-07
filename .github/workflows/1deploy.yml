@@ -10,27 +10,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ جلب الكود من GitHub
+      # 1️⃣ Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2️⃣ إعداد Node.js
+      # 2️⃣ Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20'
 
-      # 3️⃣ تثبيت dependencies للـ frontend
+      # 3️⃣ Install frontend dependencies
       - name: Install frontend dependencies
         run: npm install --legacy-peer-deps
         working-directory: ./frontend
 
-      # 4️⃣ بناء مشروع React
+      # 4️⃣ Build frontend
       - name: Build React frontend
         run: npm run build
         working-directory: ./frontend
 
-      # 5️⃣ رفع frontend عبر FTP
+      # 5️⃣ Deploy frontend via FTP (sync)
       - name: Deploy frontend via FTP
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
@@ -38,10 +38,11 @@ jobs:
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./frontend/dist/
-          server-dir: /home/basagypb/frontend
+          server-dir: /home/basagypb/frontend/
           dry-run: false
+        # حذف الملفات القديمة غير الموجودة على GitHub
 
-      # 6️⃣ رفع backend عبر FTP
+      # 6️⃣ Deploy backend via FTP (sync)
       - name: Deploy backend via FTP
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
@@ -49,6 +50,6 @@ jobs:
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./backend/
-          server-dir: /home/basagypb/backend
+          server-dir: /home/basagypb/backend/
           dry-run: false
-# now the tetsting 
+ 
