@@ -45,3 +45,5 @@ jobs:
           local-dir: ./backend
           server-dir: /home/basagypb/backend
           dry-run: false
+
+#testing one mor ftp 
