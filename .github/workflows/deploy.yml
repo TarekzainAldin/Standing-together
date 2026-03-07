@@ -4,7 +4,7 @@ name: Deploy DSH Project
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build-and-deploy:
