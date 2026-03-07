@@ -1,4 +1,4 @@
-name: Deploy Standing Together Project
+name: Deploy Standing Together via FTP
 
 on:
   push:
@@ -6,42 +6,42 @@ on:
       - master
 
 jobs:
-  build-and-deploy:
+  ftp-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
- #     - name: Setup PHP
-  #      uses: shivammathur/setup-php@v2
-   #     with:
-    #      php-version: '8.2'
-     #     extensions: mbstring, bcmath, pdo, curl
-      #    tools: composer
-
-#      - name: Setup Node
-#        uses: actions/setup-node@v3
-#        with:
-#          node-version: '20'
-
-#      - name: Install PHP dependencies
-#        run: composer install --no-interaction --prefer-dist --optimize-autoloader
-
-#      - name: Install JS dependencies
-#        run: npm install --legacy-peer-deps
-
-#      - name: Build React frontend
-#        run: npm run build
-
-#      - name: Run PHP Tests
-#        run: ./vendor/bin/phpunit
-
-      - name: Deploy via SSH
-        uses: appleboy/scp-action@master
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          source: "."
-          target: "/var/www/dsh"
+          node-version: '20'
+
+      - name: Install frontend dependencies
+        run: npm install --legacy-peer-deps
+        working-directory: ./frontend
+
+      - name: Build React frontend
+        run: npm run build
+        working-directory: ./frontend
+
+      - name: Deploy frontend via FTP
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./frontend/dist
+          server-dir: /home/basagypb/frontend
+          dry-run: false
+
+      - name: Deploy backend via FTP
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./backend
+          server-dir: /home/basagypb/backend
+          dry-run: false
