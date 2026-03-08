@@ -7,5 +7,7 @@ node_modules/
 .env.docker
 backend/.env
 backend/.env.docker
+frontend/.env
+frontend/.env.docker
 
 
