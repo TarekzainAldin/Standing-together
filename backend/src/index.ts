@@ -53,7 +53,6 @@ app.use(
     credentials: true,
   })
 );
-<<<<<<< HEAD
 // CORS setup
 // const allowedOrigins = [
 //   "http://localhost:5173",
@@ -75,9 +74,6 @@ app.use(
 //   if (!origin || allowedOrigins.includes(origin)) callback(null, true);
 //   else callback(new Error("Not allowed by CORS"));
 // }, credentials: true }));
-=======
-
->>>>>>> chang the cros for the ginreal
 
 // CORS setup
 // const allowedOrigins = [
