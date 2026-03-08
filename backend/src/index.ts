@@ -53,6 +53,7 @@ app.use(
     credentials: true,
   })
 );
+<<<<<<< HEAD
 // CORS setup
 // const allowedOrigins = [
 //   "http://localhost:5173",
@@ -74,24 +75,26 @@ app.use(
 //   if (!origin || allowedOrigins.includes(origin)) callback(null, true);
 //   else callback(new Error("Not allowed by CORS"));
 // }, credentials: true }));
+=======
 
+>>>>>>> chang the cros for the ginreal
+
+// CORS setup
 // const allowedOrigins = [
 //   "http://localhost:5173",
-//   process.env.FRONTEND_ORIGIN 
-// ].filter(Boolean); // لتنظيف القيم الفارغة
+//   "http://frontend_dev:5173",
+//   process.env.FRONTEND_ORIGIN
+// ].filter(Boolean);
 
 // app.use(cors({
 //   origin: (origin, callback) => {
-//     // السماح إذا كان الطلب من مصدر موثوق أو بدون origin (مثل تطبيقات الموبايل/Postman)
-//     if (!origin || allowedOrigins.includes(origin)) {
-//       callback(null, true);
-//     } else {
-//       console.log("CORS Rejected Origin:", origin); // مفيد جداً للتصحيح
-//       callback(new Error("Not allowed by CORS"));
-//     }
+//     if (!origin || allowedOrigins.includes(origin)) return callback(null, true);
+//     console.log("❌ CORS blocked:", origin);
+//     callback(new Error("Not allowed by CORS"));
 //   },
 //   credentials: true
 // }));
+
 
 app.get(
   `/`,
